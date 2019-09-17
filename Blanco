@@ -1,0 +1,35 @@
+public class Blanco // esta clase tiene la funcion de devolver el puntaje obtenido en un tiro usando las coordenadas brindadas por el juez
+{
+
+    private double respuesta = 0.0;
+
+    public double checkCirculo(double x, double y){  // este metodo calcula donde cae la flecha usando la ecuacion de la circunferencia
+        double circulo = 0.0; 
+        circulo = Math.pow(x - 1,2) + Math.pow(y - 1,2);
+        return circulo;
+    }
+
+    public double sumarPuntos (double x, double y)    // este metodo calcula cuantos puntos se suman dependiendo de donde cayo la flecha
+    {
+        double puntos = 0.0;
+        double coordenada = checkCirculo(x,y);
+        if( coordenada <=1){     //estos if's deciden cuantos puntos hay que sumar usando los radios de los circulos del blanco elevados al cuadrado junto con la coordenada calculada con checkCirculo
+            if (coordenada  <= Math.pow(0.4,2)){
+                if (coordenada  <= Math.pow(0.05,2)){
+                    puntos += 100;
+                }   
+                else {
+                    puntos += 20;
+                }
+            }
+            else {
+                puntos += 15;
+            }
+        }    
+        else {
+            puntos += 0;
+        }
+        return puntos;
+    }
+
+}
