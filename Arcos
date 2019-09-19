@@ -1,0 +1,53 @@
+public class Arcos // Esta clase contiene los metodos para modificar el tiro segun el nivel del tirador
+{
+    double x0, y0; 
+    public Arcos (){
+        x0 = 0.0;
+        y0 = 0.0;
+    }
+
+    public double signoRandom(double x){  // Este metodo elige aleatoriamente si el valor de entrada es negativo o positivo
+        int i = 0;
+        double y = 0;
+        i = (int) (Math.random()*2)+1;
+        if (i == 1){
+            y = x * -1;
+        }
+        else{
+            y = x;
+        }
+        return y;
+    }
+
+    public void arcoNovato(double x, double y){   // Metodo que calcula el error del tiro dependiendo de la habilidad del tirador, elige un numero aleatorio entre 0 y el margen, luego elige si es positivo o negativo
+        x0 = 0;
+        y0 = 0;
+        x0 = x + signoRandom(Math.random() * 1);
+        y0 = y + signoRandom(Math.random() * 1);
+    }
+
+    public void arcoIntermedio(double x, double y){  
+        x0 = 0;
+        y0 = 0;
+        x0 = x + signoRandom(Math.random() * 0.25);
+        y0 = y + signoRandom(Math.random() * 0.25);
+    }
+
+    public void arcoProfesional(double x, double y){  
+        x0 = 0;
+        y0 = 0;
+        x0 = x + signoRandom(Math.random() * 0.05);
+        y0 = y + signoRandom(Math.random() * 0.05);
+    }
+
+    public double getValor(){
+        return x0;
+
+    }
+
+    public double getValor2(){
+        return y0;
+
+    }
+
+}
