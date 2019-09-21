@@ -1,0 +1,55 @@
+public class Brain {
+    Interfaz interfaz;
+    Juez juez;
+    
+    public Brain(){                //Metodo constructor
+        interfaz = new Interfaz();
+        juez = new Juez();
+    }
+    
+    public void run(){
+        int opcion = interfaz.desplegarMenu();
+        switch (opcion){
+            case 1:
+                iniciarPartida();
+                break;
+            case 2:
+                verPuntajeMasAlto();
+                break;
+            case 3: 
+                configurarCantDeSets();
+                break;
+            case 4:
+                configurarCantDeTirosPorSets();
+                break;
+            case 5:
+                salir();
+                break;
+        
+        }
+    
+    }
+    
+    public void iniciarPartida(){
+    
+    }
+  
+    public void verPuntajeMasAlto(){
+        
+    }
+
+    public void configurarCantDeSets(){
+        int cantSets = interfaz.pedirCantSetsDeseada();
+        juez.cambiarSets(cantSets);
+    }
+    
+    public void configurarCantDeTirosPorSets(){
+        int cantTiros = interfaz.pedirCantTirosDeseada();
+        juez.cambiarTiros (cantTiros);
+    }
+    
+    public void salir(){
+    
+    }
+    
+}
