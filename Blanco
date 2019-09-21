@@ -9,27 +9,27 @@ public class Blanco // esta clase tiene la funcion de devolver el puntaje obteni
         return circulo;
     }
 
-    public double sumarPuntos (double x, double y)    // este metodo calcula cuantos puntos se suman dependiendo de donde cayo la flecha
+    public double calcularPuntos (double x, double y)    // este metodo calcula cuantos puntos se suman dependiendo de donde cayo la flecha
     {
-        double puntos = 0.0;
+        double puntosFinales = 0.0;
         double coordenada = checkCirculo(x,y);
         if( coordenada <=1){     //estos if's deciden cuantos puntos hay que sumar usando los radios de los circulos del blanco elevados al cuadrado junto con la coordenada calculada con checkCirculo
             if (coordenada  <= Math.pow(0.4,2)){
                 if (coordenada  <= Math.pow(0.05,2)){
-                    puntos += 100;
+                    puntosFinales += 100;
                 }   
                 else {
-                    puntos += 20;
+                    puntosFinales += 20;
                 }
             }
             else {
-                puntos += 15;
+                puntosFinales += 15;
             }
         }    
         else {
-            puntos += 0;
+            puntosFinales += 0;
         }
-        return puntos;
+        return puntosFinales;
     }
 
 }
