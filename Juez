@@ -1,0 +1,30 @@
+public class Juez{
+    Blanco blanco;
+    private double x2, y2, puntosHumanos, puntosRobot, puntosMasAltos;
+    private int cantSets, cantTiros;
+    private String JugadorMasAlto;
+    
+    public Juez (){
+        blanco = new Blanco();
+        cantSets = 2;
+        cantTiros = 3;
+    }
+
+    public void sumarPuntos(double puntosFinales){
+        
+    }
+
+    public void cambiarSets(){        //Metodos para cambiar cantidad de sets y tiros
+        this.cantSets = cantSets;
+    }
+    public void cambiarTiros(){
+        this.cantTiros = cantTiros;
+    }
+    
+    public int getSets(){
+        return cantSets;
+    }
+    public int getTiros(){
+        return cantTiros;
+    }
+}
