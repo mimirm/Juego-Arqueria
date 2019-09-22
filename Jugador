@@ -1,0 +1,19 @@
+public class Jugador {
+    Arcos arco;
+    int tipoArco, estrategia;
+    
+    public Jugador(int estrategia) {
+        arco = new Arcos();
+        tipoArco = (int) (Math.random()*3) +1;  
+           /**
+            *  tipoArco 1 es newbie
+            *           2 es intermedio
+            *           3 es experto
+            */
+        this.estrategia = estrategia;
+     }
+    
+    public void lanzarFlecha(){  //metodo pide coordenadas al jugador
+      
+     }
+}
