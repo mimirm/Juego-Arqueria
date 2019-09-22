@@ -1,34 +1,42 @@
 public class Brain {
     Interfaz interfaz;
     Juez juez;
+    Arcos arco;
+    Vientos viento;
+    Blanco blanco;
     static int jugadorHumano = 1;
+    private boolean salir;
 
     public Brain(){                //Metodo constructor
         interfaz = new Interfaz();
         juez = new Juez();
+        arco = new Arcos();
+        blanco = new Blanc();
+        salir = false;
     }
 
     public void run(){
-        int opcion = interfaz.desplegarMenu();
-        switch (opcion){
-            case 1:
-                iniciarPartida();
-                break;
-            case 2:
-                verPuntajeMasAlto();
-                break;
-            case 3: 
-                configurarCantDeSets();
-                break;
-            case 4:
-                configurarCantDeTirosPorSets();
-                break;
-            case 5:
-                salir();
-                break;
-
-        }
-
+        do{
+            int opcion = interfaz.desplegarMenu();
+            switch (opcion){
+                case 1:
+                    iniciarPartida();
+                    break;
+                case 2:
+                    verPuntajeMasAlto();
+                    break;
+                case 3: 
+                    configurarCantDeSets();
+                    break;
+                case 4:
+                    configurarCantDeTirosPorSets();
+                    break;
+                case 5:
+                    salir();
+                    break;
+    
+            }
+        }while(!salir);
     }
 
     public void iniciarPartida(){
@@ -36,24 +44,51 @@ public class Brain {
         Jugador jugadorRobot = new Jugador((int)(Math.random()*3)+2);
         double primerJugador = decidirPrimerjugador();
         
-         if (primerJugador < 0.5){  //Sea [0.0 a 0.5[ el rango para que Usuario vaya primero
+        if (primerJugador < 0.5){  //Sea [0.0 a 0.5[ el rango para que Usuario vaya primero
             
-           jugadorHumano.lanzarFlecha();
+           double x0 = interfaz.pedirCoordenadaX();
+           double y0 = interfaz.pedirCoordenadaY();
+          
+           jugadorHumano.lanzarFlecha( x0 , y0 );
+           double x1 = arco.getX1();
+           double y1 = arco.getY1();
            
-            
+           generarVientoDelSet();
+           viento.desviarFlecha( x1, y1);
+           double x2 = viento.getX2();
+           double y2 = viento.getY2();
+          
+           double puntosTiro = blanco.calCularPuntos(x2, y2);
+           juez.tiroTiroPrevio(x2, y2);
+           juez.setPuntosDelTiro(puntosTiro);
+           
         }
         else{
         
         }
     }
     
+    public void generarVientosDelSet(){
+        int tipoViento = (int)(Math.random()*3)+1;
+          /**
+           *  Viento 1 es leve
+           *         2 es intermedio
+           *         3 es fuerte
+           */
+        double direccionViento = ((Math.random()*2)+1)*Math.PI;
+        //direccionViento = [0,2pi[
+        viento.setTipoViento(tipoViento);
+        viento.setDireccionViento(direccionViento);
+    }
+    
     public double decidirPrimerJugador(){
-        double primerJugador = ( Math.random());
+        double primerJugador = (Math.random());
         return primerJugador;
     }
 
     public void verPuntajeMasAlto(){
-        interfaz.verPuntuajeMasAlto();
+        String mensaje = juez.puntajeMasAlto();
+        interfaz.displayMessage(mesaje);
     }
 
     public void configurarCantDeSets(){
@@ -67,7 +102,6 @@ public class Brain {
     }
 
     public void salir(){
-
+        salir = true;
     }
-
 }
