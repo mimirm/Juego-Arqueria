@@ -1,0 +1,23 @@
+public class Interfaz{
+    
+    
+    public void verPuntajeMasAlto(){  //metodo muestra puntaje mas alto
+    
+    }
+    
+    public void pedirTiro(){
+        pedirCoordenadaX();
+        pedirCoordenadaY();
+    }
+    
+    public int pedirCantSetsDeseada(){ //metodo pide al usuario cantsets que desea
+        int cantSets=0;
+        return cantSets;
+    }
+    
+    public int pedirCantTirosDeseada(){  //metodo pide al usuario cantidad de tiros
+        int cantTiros= 0;
+        return cantTiros;
+    }
+    
+}
