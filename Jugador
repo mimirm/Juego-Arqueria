@@ -11,9 +11,23 @@ public class Jugador {
             *           3 es experto
             */
         this.estrategia = estrategia;
+        /*
+         *   Estrategia 1 es humana
+         *              2 a 4 es robot
+         */
      }
     
     public void lanzarFlecha(){  //metodo pide coordenadas al jugador
-      
+        switch(tipoArco){
+            case 1:
+                arco.arcoNovato (x0,y0);  
+                break;
+            case 2:
+                arco.arcoIntermedio (x0,y0);
+                break;
+            case 3:
+                arco.arcoProfesional (x0,y0);
+                break;
+        }
      }
 }
