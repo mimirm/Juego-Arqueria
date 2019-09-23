@@ -11,7 +11,7 @@ public class Brain {
         interfaz = new Interfaz();
         juez = new Juez();
         arco = new Arcos();
-        blanco = new Blanc();
+        blanco = new Blanco();
         salir = false;
     }
 
@@ -42,30 +42,45 @@ public class Brain {
     public void iniciarPartida(){
         Jugador jugadorHumano = new Jugador(1);
         Jugador jugadorRobot = new Jugador((int)(Math.random()*3)+2);
-        double primerJugador = decidirPrimerjugador();
+        double primerJugador = decidirPrimerJugador();
+        int cantSets = juez.getSets();
+        int cantTiros = juez.getTiros();
         
         if (primerJugador < 0.5){  //Sea [0.0 a 0.5[ el rango para que Usuario vaya primero
-            
-           double x0 = interfaz.pedirCoordenadaX();
-           double y0 = interfaz.pedirCoordenadaY();
-          
-           jugadorHumano.lanzarFlecha( x0 , y0 );
-           double x1 = arco.getX1();
-           double y1 = arco.getY1();
-           
-           generarVientoDelSet();
-           viento.desviarFlecha( x1, y1);
-           double x2 = viento.getX2();
-           double y2 = viento.getY2();
-          
-           double puntosTiro = blanco.calCularPuntos(x2, y2);
-           juez.tiroTiroPrevio(x2, y2);
-           juez.setPuntosDelTiro(puntosTiro);
-           
+           for(int turnos=1; turnos<=cantTiros; turnos ++){
+               /*
+                * Turno del Humano
+                */ 
+               //pide que lance
+               double x0 = interfaz.pedirCoordenadaX();
+               double y0 = interfaz.pedirCoordenadaY();
+               //calcula desvio por experiencia
+               jugadorHumano.lanzarFlecha( x0 , y0 );
+               double x1 = arco.getX1();
+               double y1 = arco.getY1();
+               //calcula desvio por viento
+               generarVientosDelSet();
+               viento.desviarFlecha( x1, y1);
+               double x2 = viento.getX2();
+               double y2 = viento.getY2();
+               //guarda donde cae la flecha
+               juez.setTiroPrevio(x2, y2);
+               //calcula los puntos y los guarda
+               double puntosTiro = blanco.calcularPuntos(x2, y2);
+               juez.setPuntosDelTiro(puntosTiro);
+               //Muestra al usuario resultado del tiro
+               mostrarResultadoDelTiro(x2,y2,puntosTiro);
+           }
+           //Aqui sigue el turno del robot
         }
         else{
         
         }
+    }
+    
+    public void mostrarResultadoDelTiro(double x2, double y2, double puntosTiro){
+        String resultadoDelTiro = "La flecha cayo en:( "+x2+", "+y2+"). La puntuacion es:"+puntosTiro;
+        interfaz.displayMessage(resultadoDelTiro);
     }
     
     public void generarVientosDelSet(){
@@ -87,8 +102,8 @@ public class Brain {
     }
 
     public void verPuntajeMasAlto(){
-        String mensaje = juez.puntajeMasAlto();
-        interfaz.displayMessage(mesaje);
+        String mensaje = juez.darPuntajeMasAlto();
+        interfaz.displayMessage(mensaje);
     }
 
     public void configurarCantDeSets(){
@@ -104,4 +119,5 @@ public class Brain {
     public void salir(){
         salir = true;
     }
+
 }
