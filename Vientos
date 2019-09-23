@@ -1,0 +1,53 @@
+public class Vientos{
+    double x2, y2, direccionViento;
+    int tipoViento;
+    
+  
+    public void setDireccionViento(double direccionViento){
+        this.direccionViento = direccionViento;
+    }
+    public void setTipoViento(int tipoViento){
+        this.tipoViento = tipoViento;
+    }
+    
+    public void desviarFlecha(double x1, double y1){
+        switch(tipoViento){
+            case 1:
+                soplarLeve(x1,y1);
+            break;
+            case 2:
+                soplarIntermedio(x1,y1);
+            break;
+            case 3:
+                soplarFuerte(x1,y1);
+            break;      
+        
+        }
+    }
+    
+    public void soplarLeve(double x1, double y1){
+        x2 = 0.0;
+        y2 = 0.0;
+        x2 = x1 + (((Math.random()*2)+1)/10)*Math.cos(direccionViento);
+        y2 = y1 + (((Math.random()*2)+1)/10)*Math.sin(direccionViento);
+    }
+    public void soplarIntermedio(double x1, double y1){
+        x2 = 0.0;
+        y2 = 0.0;
+        x2 = x1 + (((Math.random()*4)+1)/10)*Math.cos(direccionViento);
+        y2 = y1 + (((Math.random()*4)+1)/10)*Math.sin(direccionViento);   
+    }
+    public void soplarFuerte(double x1, double y1){
+        x2 = 0.0;
+        y2 = 0.0;
+        x2 = x1 + (((Math.random()*9)+1)/10)*Math.cos(direccionViento);
+        y2 = y1 + (((Math.random()*9)+1)/10)*Math.sin(direccionViento);
+    }
+    
+    public double getX2(){
+        return x2;
+    }
+    public double getY2(){
+        return y2;
+    }
+}
