@@ -1,0 +1,44 @@
+public class Brain{
+    //todo esto lo necesita el brain para que funciones con la interfaz
+    private Interfaz interfaz;
+    
+    public Brain(){
+        interfaz = new Interfaz();
+    }
+    
+    //esto hace que el programa no pete xd
+    public void EscogerOpcion(){
+        int Opcion = 14;
+        boolean Seguir = true;
+        while (Seguir){
+            Opcion = interfaz.EscogerOpcion("\nMenu: \n1. Jugar \n2. Configurar cantidad de sets \n3. Configurar cantidad de tiros por set \n4. Ver Puntuacion mas alta \n5. SALIR");
+            Seguir = !(1<= Opcion && Opcion <= 5);
+        }   
+        interfaz.setOpcion(Opcion);
+    }
+    
+    //desde aqui podriamos manipular todos los metodos que son necesarios para el juego, dependiendo de la opcion que se escoja podriamos llamar a los metodos desde ahi xd 
+    //obviamente faltan metodos para que funcione como planteo arriba.   
+    public void DisplayOpcion(){
+        switch (interfaz.getOpcion()){
+            case 1:
+                //pones el metodo para iniciar el juego.
+            break;
+            case 2:
+                //juez.setSets(interfaz.ConfigurarSets()); lo pongo como comment porque no tengo al juez xd 
+                EscogerOpcion();
+            break;
+            case 3:
+                //juez.setTiros(interfaz.ConfigurarTiros());
+                EscogerOpcion();
+            break;
+            case 4:
+                //el metodo que tenga el juez para mostrar la puntuacion mas alta
+            break;
+            case 5:
+                interfaz.adios();
+            break;  
+        }
+    }
+    
+}
