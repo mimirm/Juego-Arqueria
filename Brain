@@ -1,85 +1,102 @@
 public class Brain {
     Interfaz interfaz;
-    Juez juez;
-    Arcos arco;
-    Vientos viento;
-    Blanco blanco;
-    static int jugadorHumano = 1;
-    private boolean salir;
+    private int cantSets, cantTiros, partidasJugadas;
+    Partida partida;
 
     public Brain(){                //Metodo constructor
         interfaz = new Interfaz();
-        juez = new Juez();
-        arco = new Arcos();
-        blanco = new Blanco();
-        salir = false;
+        cantSets = 2;
+        cantTiros = 3;
+        partidasJugadas = 0;
+
     }
 
+    public int escogerOpcion(){
+        int opcion = 14;
+        boolean Seguir = true;
+        while (Seguir){
+           String entrada = interfaz.askInfo("\nMenu: \n1. Jugar \n2. Configurar cantidad de sets \n3. Configurar cantidad de tiros por set \n4. Ver Puntuacion mas alta \n5. SALIR");
+           try {
+              opcion = Integer.parseInt( entrada );  
+           }
+           catch(Exception e){
+              opcion = -14;
+           }
+            Seguir = !(1<= opcion && opcion <= 5);
+        }   
+        interfaz.setOpcion(opcion);
+        return opcion;
+    }
+    
+     public void decidirOpcion( int opcion ){
+        switch (opcion){
+            case 1:
+                partidasJugadas++;   
+                iniciarPartida();
+            break;
+            case 2:
+                verPuntajeMasAlto();
+            break;
+            case 3:
+                configurarCantDeSets();
+            break;
+            case 4:
+                configurarCantDeTirosPorSets();
+            break;
+        }
+    }
+    
     public void run(){
+        int opcion;
         do{
-            int opcion = interfaz.desplegarMenu();
-            switch (opcion){
-                case 1:
-                    iniciarPartida();
-                    break;
-                case 2:
-                    verPuntajeMasAlto();
-                    break;
-                case 3: 
-                    configurarCantDeSets();
-                    break;
-                case 4:
-                    configurarCantDeTirosPorSets();
-                    break;
-                case 5:
-                    salir();
-                    break;
-    
-            }
-        }while(!salir);
+            opcion = escogerOpcion();
+            decidirOpcion( opcion );
+        }while( opcion != 5);
+
+        salir();
     }
 
-  
-    public void mostrarResultadoDelTiro(double x2, double y2, double puntosTiro){
-        String resultadoDelTiro = "La flecha cayo en:( "+x2+", "+y2+"). La puntuacion es:"+puntosTiro;
-        interfaz.displayMessage(resultadoDelTiro);
+    public void iniciarPartida(){
+        partida = new Partida();
+        partida.iniciarPartida(cantSets, cantTiros);
     }
     
-    public void generarVientosDelSet(){
-        int tipoViento = (int)(Math.random()*3)+1;
-          /**
-           *  Viento 1 es leve
-           *         2 es intermedio
-           *         3 es fuerte
-           */
-        double direccionViento = ((Math.random()*2)+1)*Math.PI;
-        //direccionViento = [0,2pi[
-        viento.setTipoViento(tipoViento);
-        viento.setDireccionViento(direccionViento);
+    public void salir(){
+        interfaz.displayMessage("Adios Arquero!");
     }
     
-    public double decidirPrimerJugador(){
-        double primerJugador = (Math.random());
-        return primerJugador;
-    }
-
     public void verPuntajeMasAlto(){
-        String mensaje = juez.darPuntajeMasAlto();
-        interfaz.displayMessage(mensaje);
+        if(partidasJugadas == 0){
+            interfaz.displayMessage("No han habido partidas");
+        }
+        else{
+            String mensaje = partida.darPuntajeMasAlto();
+            interfaz.displayMessage(mensaje);
+        }
     }
 
     public void configurarCantDeSets(){
-        int cantSets = interfaz.pedirCantSetsDeseada();
-        juez.cambiarSets(cantSets);
+        String entrada = interfaz.askInfo("Digite la cantidad de sets para el juego: ");
+        try {
+            cantSets = Integer.parseInt(entrada);
+        }
+        catch(Exception e){
+            interfaz.displayMessage("Se configuraron 2 sets por default al notar que no se ingreso un numero entero.");
+            cantSets = 2;
+        }
     }
 
     public void configurarCantDeTirosPorSets(){
-        int cantTiros = interfaz.pedirCantTirosDeseada();
-        juez.cambiarTiros (cantTiros);
-    }
+        String entrada = interfaz.askInfo("Digite la cantidad de tiros para el juego");
+        try {
+            cantTiros = Integer.parseInt(entrada);
+        }
+        catch(Exception e){
+            interfaz.displayMessage("Se configuraron 3 tiros por default al notar que no se ingreso un numero entero.");
+            cantTiros = 3;
+        }
 
-    public void salir(){
-        salir = true;
-    }
+     }
+     
 
 }
