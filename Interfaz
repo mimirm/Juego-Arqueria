@@ -1,17 +1,39 @@
 import javax.swing.JOptionPane;
+import java.util.Scanner;
 public class Interfaz {
-    private int Opcion;
-
+    private boolean usarGrafica;
+    Scanner input;
+    
+    public Interfaz(int args_count){
+        if(args_count == 0){
+            usarGrafica = true;
+        }
+        else{
+            usarGrafica = false; 
+            input = new Scanner(System.in);
+        }
+    }
     //Metodos cascarones para mostrar y pedir info
     public void displayMessage(String mensaje){
-        JOptionPane.showMessageDialog(null, mensaje);
+        if(usarGrafica){
+            JOptionPane.showMessageDialog(null, mensaje);
+        }
+        else{
+            System.out.println(mensaje);
+        }
     }
     public String askInfo(String mensaje){
         String entrada;
-        entrada = JOptionPane.showInputDialog(
-                   null,
-                   mensaje,
-                   JOptionPane.QUESTION_MESSAGE);
+        if(usarGrafica){ 
+            entrada = JOptionPane.showInputDialog(
+                       null,
+                       mensaje,
+                       JOptionPane.QUESTION_MESSAGE);
+        }
+        else{
+            System.out.println(mensaje);
+            entrada = input.next();
+        }
         return entrada;
     }
 
