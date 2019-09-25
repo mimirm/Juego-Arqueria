@@ -66,13 +66,10 @@ public class Interfaz {
         return c;
     }
     
-    public void VerPuntaje(String mensaje){
+    public void Mensaje(String mensaje){
         JOptionPane.showMessageDialog(null,mensaje);
     }
     
-    public void adios(){
-       JOptionPane.showMessageDialog(null,"Adios vaquero");
-    }
 
 
 }
