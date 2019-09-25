@@ -3,8 +3,8 @@ public class Brain {
     private int cantSets, cantTiros, partidasJugadas;
     Partida partida;
 
-    public Brain(){                //Metodo constructor
-        interfaz = new Interfaz();
+    public Brain(int args_count){                //Metodo constructor
+        interfaz = new Interfaz(args_count);
         cantSets = 2;
         cantTiros = 3;
         partidasJugadas = 0;
