@@ -1,12 +1,10 @@
-import javax.swing.JOptionPane; 
-import java.util.Scanner;
-public class Interfaz{
-    
-    Scanner input = new Scanner(System.in);
-    
+import javax.swing.JOptionPane;
+public class Interfaz {
+    private int Opcion;
+
+    //Metodos cascarones para mostrar y pedir info
     public void displayMessage(String mensaje){
         JOptionPane.showMessageDialog(null, mensaje);
-        System.out.println (mensaje);
     }
     public String askInfo(String mensaje){
         String entrada;
@@ -14,105 +12,7 @@ public class Interfaz{
                    null,
                    mensaje,
                    JOptionPane.QUESTION_MESSAGE);
-        System.out.println(mensaje);
-        entrada = input.next();
         return entrada;
     }
-    
-    public int desplegarMenu(){
-        int opcion = JOptionPane.showOptionDialog(
-                       null,
-                       "Bienvenido! Que desea hacer?",
-                       "Juego de Arqueria",
-                       JOptionPane.YES_NO_CANCEL_OPTION,
-                       JOptionPane.QUESTION_MESSAGE,
-                       null,
-                       new Object[]{
-                       "1.Iniciar partida",
-                       "2.Configurar cantidad de sets",
-                       "3.Configurar cantidad de tiros por set",
-                       "4.Ver puntaje mas alto",
-                       "5.Salir"},
-                       5);
-        opcion +=1;
-        
-        System.out.println("Bienvenido al juego Arqueria!\n Que desea hacer?\n1.Iniciar partida\n2.Configurar cantidad de sets\n3.Configurar cantidad de tiros por set\n4.Ver puntaje mas alto\n5.Salir");
-        String respuesta = input.next();
-        try{
-            opcion = Integer.parseInt(respuesta);    
-        }
-        catch(Exception e){
-            displayMessage("Invalido");
-        }
-      
-        return opcion;               
-    }
-    
-    public double pedirCoordenadaX(){
-        double x0 = 0.0;
-        boolean ingresoValido=false;
-        do{
-            String respuesta = askInfo("Ingrese la coordenada X");
-            try{
-                x0 = Double.parseDouble(respuesta);
-                ingresoValido = true;
-            }
-            catch(Exception e){
-                displayMessage("Invalido.");
-            }
-        }while(!ingresoValido);
-        return x0;
-    }
-    public double pedirCoordenadaY(){
-        double y0 = 0.0;
-        boolean ingresoValido=false;
-        do{
-            String respuesta = askInfo("Ingrese la coordenada Y");
-            try{
-                y0 = Double.parseDouble(respuesta);
-                ingresoValido = true;
-            }
-            catch(Exception e){
-                displayMessage("Invalido.");
-            }
-        }while(!ingresoValido);
-        return y0;
-    }
-    
-    public int pedirCantSetsDeseada(){ //metodo pide al usuario cantsets que desea
-        int cantSets=2;
-        boolean ingresoValido=false;
-        do{
-            String respuesta = askInfo("Ingrese la cantidad de Sets deseada");
-            try{
-                cantSets = Integer.parseInt(respuesta);
-                if (cantSets>= 2){
-                    ingresoValido = true;
-                }
-            }
-            catch(Exception e){
-                displayMessage("Invalido.");
-            }
-        }while(!ingresoValido);
-        return cantSets;
-    }
-    
-    public int pedirCantTirosDeseada(){  //metodo pide al usuario cantidad de tiros
-        int cantTiros= 3;
-        boolean ingresoValido=false;
-        do{
-            String respuesta = askInfo("Ingrese la cantidad de tiros por set deseada");
-            try{
-                cantTiros = Integer.parseInt(respuesta);
-                if (cantTiros>= 3){
-                    ingresoValido = true;
-                }
-            }
-            catch(Exception e){
-                displayMessage("Invalido.");
-            }
-        }while(!ingresoValido);
-        return cantTiros;
-    }
-    
+
 }
