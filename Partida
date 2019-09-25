@@ -1,0 +1,38 @@
+    public void iniciarPartida(){
+        Jugador jugadorHumano = new Jugador(1);
+        Jugador jugadorRobot = new Jugador((int)(Math.random()*3)+2);
+        double primerJugador = decidirPrimerJugador();
+        int cantSets = juez.getSets();
+        int cantTiros = juez.getTiros();
+        
+        if (primerJugador < 0.5){  //Sea [0.0 a 0.5[ el rango para que Usuario vaya primero
+           for(int turnos=1; turnos<=cantTiros; turnos ++){
+               /*
+                * Turno del Humano
+                */ 
+               //pide que lance
+               double x0 = interfaz.pedirCoordenadaX();
+               double y0 = interfaz.pedirCoordenadaY();
+               //calcula desvio por experiencia
+               jugadorHumano.lanzarFlecha( x0 , y0 );
+               double x1 = arco.getX1();
+               double y1 = arco.getY1();
+               //calcula desvio por viento
+               generarVientosDelSet();
+               viento.desviarFlecha( x1, y1);
+               double x2 = viento.getX2();
+               double y2 = viento.getY2();
+               //guarda donde cae la flecha
+               juez.setTiroPrevio(x2, y2);
+               //calcula los puntos y los guarda
+               double puntosTiro = blanco.calcularPuntos(x2, y2);
+               juez.setPuntosDelTiro(puntosTiro);
+               //Muestra al usuario resultado del tiro
+               mostrarResultadoDelTiro(x2,y2,puntosTiro);
+           }
+           //Aqui sigue el turno del robot
+        }
+        else{
+        
+        }
+    }
