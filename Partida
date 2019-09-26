@@ -1,38 +1,87 @@
-    public void iniciarPartida(){
-        Jugador jugadorHumano = new Jugador(1);
-        Jugador jugadorRobot = new Jugador((int)(Math.random()*3)+2);
-        double primerJugador = decidirPrimerJugador();
-        int cantSets = juez.getSets();
-        int cantTiros = juez.getTiros();
-        
-        if (primerJugador < 0.5){  //Sea [0.0 a 0.5[ el rango para que Usuario vaya primero
-           for(int turnos=1; turnos<=cantTiros; turnos ++){
-               /*
-                * Turno del Humano
-                */ 
-               //pide que lance
-               double x0 = interfaz.pedirCoordenadaX();
-               double y0 = interfaz.pedirCoordenadaY();
-               //calcula desvio por experiencia
-               jugadorHumano.lanzarFlecha( x0 , y0 );
-               double x1 = arco.getX1();
-               double y1 = arco.getY1();
-               //calcula desvio por viento
-               generarVientosDelSet();
-               viento.desviarFlecha( x1, y1);
-               double x2 = viento.getX2();
-               double y2 = viento.getY2();
-               //guarda donde cae la flecha
-               juez.setTiroPrevio(x2, y2);
-               //calcula los puntos y los guarda
-               double puntosTiro = blanco.calcularPuntos(x2, y2);
-               juez.setPuntosDelTiro(puntosTiro);
-               //Muestra al usuario resultado del tiro
-               mostrarResultadoDelTiro(x2,y2,puntosTiro);
-           }
-           //Aqui sigue el turno del robot
-        }
-        else{
-        
-        }
+public class Partida
+{
+
+    private Jugador jugadorhumano;
+    private Jugador jugadorIA;
+    private Vientos viento;
+    private Juez juez;
+    private Interfaz interfaz;
+    int contadorsets = 0;
+    int contadortiros = 0;
+    String mensaje = "";
+    public Partida(int usarGrafica){
+        juez = new Juez();
+        jugadorhumano = new Jugador(4);
+        jugadorIA = new Jugador(decidirEstrategia());
+        viento = new Vientos();
+        interfaz = new Interfaz(usarGrafica);
     }
+
+    public void iniciarPartida(int sets, int tiros){
+        int primerjugador = decidirPrimerJugador();
+        int strat = decidirEstrategia();
+
+        for (int i = 0; i <= sets; i++){
+            viento.setDireccionViento(((Math.random()*2)+1)*Math.PI); 
+            viento.setTipoViento((int) (Math.random()*3)+1);
+            contadorsets = i;
+            for (int o = 0; o <= tiros; o++){
+                if (primerjugador == 1){
+                    jugadorhumano.lanzarFlecha(i,o,viento.getX2,viento.getY2);
+                    viento.desviarFlecha(jugadorhumano.getTirox(),jugadorhumano.getTiroy());
+                    juez.setX2Humanos(viento.getX2());
+                    juez.setY2Humanos(viento.getY2());
+                    juez.sumarPuntos();
+                    jugadorIA.lanzarFlecha(i,o,viento.getX2,viento.getY2);
+                    viento.desviarFlecha(jugadorIA.getTirox(),jugadorIA.getTiroy());
+                    juez.setX2IA(viento.getX2());
+                    juez.setY2IA(viento.getY2());
+                    juez.sumarPuntosHumanos();
+                    mensaje = juez.devolverInformacion()+"Set:"+toStringSet()+"Tiro:"+toStringTiro();
+                    interfaz.displayMessage(mensaje);
+                    contadortiros = o;
+
+                
+                }
+            }
+        }
+        juez.decidirGanador();
+    }
+
+    public int getSet(){    
+        return contadorsets;
+
+    }
+
+    public int getTiro(){
+        return contadortiros;
+
+    }
+
+    public String toStringTiro(){
+        String tiros = ""+contadortiros;
+        return tiros;
+
+    }
+
+    public String toStringSet(){
+        String sets = ""+contadorsets;
+        return sets;
+
+    }
+
+
+    public int decidirEstrategia(){
+        int strat = 0;
+        strat = (int)(Math.random()*3);
+        return strat;
+
+    }
+
+    public int decidirPrimerJugador(){
+        int primerJugador = (int)(Math.random()*3);
+        return primerJugador;
+    }
+
+}
+
