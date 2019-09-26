@@ -1,59 +1,59 @@
 public class Juez{
-    //Blanco blanco;
-    private double x2, y2, puntosHumanos, puntosRobot, puntosMasAltos, puntosTiro;
-    private int cantSets, cantTiros;
+    private Blanco blanco;
+    private double x2Humano, y2Humano, x2IA, y2IA, puntosHumanos, puntosIA, puntosMasAltos, puntosTiro;
     private String puntajeMasAlto, jugadorMasAlto;
     
+    //Constructor
     public Juez (){
-       // blanco = new Blanco();
-        cantSets = 2;
-        cantTiros = 3;
+       blanco = new Blanco();
+    }
+
+     //Partida le da donde cae la flecha humana
+    public void setX2Humano(double x2){
+        this.x2Humano = x2;
+    }
+     public void setY2Humano(double y2){
+        this.y2Humano = y2;
     }
     
-    public void setTiroPrevio(double x2, double y2){
-        this.x2 = x2;
-        this.y2 = y2;
-    }
-    public double getX2(){
-        return x2;
-    }
-     public double getY2(){
-        return y2;
-    }
-    public void setPuntosDelTiro(double puntosTiro){
-        this.puntosTiro = puntosTiro;
+    //juez calcula los puntos del usuario usando blanco
+    public void sumarPuntosHumanos (){
+        double porSumar = blanco.calcularPuntos(x2Humano, y2Humano);
+        puntosHumanos += porSumar;
     }
     
-    public void contadorPuntosHumanos (){
+    //Partida le da donde cae la flecha IA
+    public void setX2IA(double x2){
+        this.x2IA = x2;
+    }
+     public void setY2IA(double y2){
+        this.y2IA = y2;
+    }
     
-     }
+    //juez calcula los puntos de IA usando blanco
+    public void sumarPuntosIA (){
+        double porSumar = blanco.calcularPuntos(x2IA, y2IA);
+        puntosIA += porSumar;
+    }
     
+    //Para que el usuario se guie
+    public String devolverInformacion(){
+       String mensaje = "La flecha cayo en: (" + x2Humano + " ,"+ y2Humano + ").\nSu puntaje actual es: "+ puntosHumanos + ".";
+       return mensaje;
+    }
+    
+    //Guarda informacion del puntaje mas alto 
     public void setPuntosMasAltos(double puntosFinales){
         this.puntosMasAltos = puntosFinales;
     }
-    
     public void setJugadorMasAlto(String jugadorMasAlto){
         this.jugadorMasAlto = jugadorMasAlto;
     }
     
+    //Genera string que dice la info del puntaje mas alto
     public String darPuntajeMasAlto(){   //Para que cerebro pueda ver cuales son
-        puntajeMasAlto = "El puntaje mas alto es:" + puntosMasAltos+ "\nPor:"+jugadorMasAlto;
+        puntajeMasAlto = "El puntaje mas alto es:" + puntosMasAltos + "\nPor:"+jugadorMasAlto;
         return puntajeMasAlto;
     }
 
-    public void cambiarSets(int cantSets){        //Metodos para cambiar cantidad de sets y tiros
-        this.cantSets = cantSets;
-    }
-    
-    public void cambiarTiros(int cantTiros){
-        this.cantTiros = cantTiros;
-    }
-    
-    public int getSets(){
-        return cantSets;
-    }
-    
-    public int getTiros(){
-        return cantTiros;
-    }
 }
