@@ -38,7 +38,7 @@ public class Juez{
     
     //Para que el usuario se guie
     public String devolverInformacion(){
-       String mensaje = "La flecha cayo en: (" + x2Humano + " ,"+ y2Humano + ").\nSu puntaje actual es: "+ puntosHumanos + ".";
+       String mensaje = "La flecha cayo en: (" + x2Humano + " ,"+ y2Humano + ").\nSu puntaje actual es: "+ puntosHumanos + ". ";
        return mensaje;
     }
     
