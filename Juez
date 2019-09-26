@@ -2,10 +2,12 @@ public class Juez{
     private Blanco blanco;
     private double x2Humano, y2Humano, x2IA, y2IA, puntosHumanos, puntosIA, puntosMasAltos, puntosTiro;
     private String puntajeMasAlto, jugadorMasAlto;
+    private boolean empate;
     
     //Constructor
     public Juez (){
        blanco = new Blanco();
+       empate = false;
     }
 
      //Partida le da donde cae la flecha humana
@@ -55,5 +57,19 @@ public class Juez{
         puntajeMasAlto = "El puntaje mas alto es:" + puntosMasAltos + "\nPor:"+jugadorMasAlto;
         return puntajeMasAlto;
     }
-
+    
+    public String decidirGanador(){
+        String mensaje = "El ganador es: ";
+        if ( puntosHumanos > puntosIA){
+            mensaje += " Usted!\nCon "+ puntosHumanos + " puntos.";
+        } 
+        if ( puntosHumanos < puntosIA){
+            mensaje += " la computadora :(\nCon "+ puntosIA + " puntos.";
+        }
+        if (puntosHumanos == puntosIA){
+            mensaje = "Empate. Pasa a desempate";
+            empate = true;
+        }
+        return mensaje;
+    }
 }
