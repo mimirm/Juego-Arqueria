@@ -1,10 +1,11 @@
 public class Brain {
     Interfaz interfaz;
-    private int cantSets, cantTiros, partidasJugadas;
+    private int cantSets, cantTiros, partidasJugadas, usarGrafica;
     Partida partida;
 
     public Brain(int args_count){                //Metodo constructor
         interfaz = new Interfaz(args_count);
+        usarGrafica = args_count;
         cantSets = 2;
         cantTiros = 3;
         partidasJugadas = 0;
@@ -57,7 +58,7 @@ public class Brain {
     }
 
     public void iniciarPartida(){
-        partida = new Partida();
+        partida = new Partida( usarGrafica);
         partida.iniciarPartida(cantSets, cantTiros);
     }
     
