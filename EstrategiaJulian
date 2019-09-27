@@ -1,0 +1,26 @@
+public class EstrategiaJulian{
+    private Arcos arco;
+    private double tirox , tiroy;
+    private int jugador;
+    
+    public EstrategiaJulian(){
+        tirox = 0;
+        tiroy = 0;
+        jugador = jugador = (int) (Math.random()*3)+1;
+        arco = new Arcos();
+    }
+    
+    public void Tirar(int s, int t, double x2, double y2){
+        tirox = (int) ((Math.random()*2)-0.5);
+        tiroy = (int) ((Math.random()*2)-0.5);
+    }
+    
+    public double getTirox(){
+        return tirox;
+        
+    }
+    public double getTiroy(){
+        return tiroy;
+        
+    }
+}
