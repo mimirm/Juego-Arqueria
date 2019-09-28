@@ -10,16 +10,16 @@ public class EstrategiaJulian{
         arco = new Arcos();
     }
     
-    public void Tirar(int s, int t, double x2, double y2){
+    public void tirar(int setActual, int tiroActual, double x2, double y2){
         tirox = (int) ((Math.random()*2)-0.5);
         tiroy = (int) ((Math.random()*2)-0.5);
     }
     
-    public double getTirox(){
+    public double getTiroX(){
         return tirox;
         
     }
-    public double getTiroy(){
+    public double getTiroY(){
         return tiroy;
         
     }
