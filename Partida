@@ -77,42 +77,83 @@ public class Partida
         if(juez.getUsuarioGano()){
             juez.setJugadorMasAlto(interfaz.askInfo("Digite su nombre: ") );
         }
-        
+        if(juez.getEmpate()){
+            //Muerte Subita
+            boolean empatados = true;
+            do{
+                viento.setDireccionViento(((Math.random()*2)+1)*Math.PI); 
+                viento.setTipoViento((int) (Math.random()*3)+1);
+                
+                //Si el usuario va primero:
+                if (primerjugador == 1){
+                    //Turno del usuario
+                    jugadorhumano.lanzarFlecha( 1, 1, viento.getX2(), viento.getY2());
+                    viento.desviarFlecha(jugadorhumano.getTiroX(),jugadorhumano.getTiroY());
+                    juez.setX2Humano(viento.getX2());
+                    juez.setY2Humano(viento.getY2());
+                    juez.sumarPuntosHumanos();
+                    mensaje = juez.devolverInformacionHumana() + "Set: " + toStringSet() + "Tiro: " + toStringTiro();
+                    interfaz.displayMessage(mensaje);
+                    //Turno del IA
+                    jugadorIA.lanzarFlecha( 1, 1, viento.getX2(), viento.getY2());
+                    viento.desviarFlecha( jugadorIA.getTiroX(), jugadorIA.getTiroY());
+                    juez.setX2IA( viento.getX2());
+                    juez.setY2IA( viento.getY2());
+                    juez.sumarPuntosIA();
+                    mensaje = juez.devolverInformacionIA();
+                    interfaz.displayMessage(mensaje);
+                 }
+                //Si la maquina va primero:
+                else {
+                    //Turno de IA
+                    jugadorIA.lanzarFlecha( 1, 1, viento.getX2(), viento.getY2());
+                    viento.desviarFlecha( jugadorIA.getTiroX(),jugadorIA.getTiroY());
+                    juez.setX2IA(viento.getX2());
+                    juez.setY2IA(viento.getY2());
+                    juez.sumarPuntosIA();
+                    mensaje = juez.devolverInformacionIA();
+                    interfaz.displayMessage(mensaje);
+                    //Turno del usuario
+                    jugadorhumano.lanzarFlecha( 1, 1, viento.getX2(), viento.getY2());
+                    viento.desviarFlecha( jugadorhumano.getTiroX(), jugadorhumano.getTiroY());
+                    juez.setX2Humano(viento.getX2());
+                    juez.setY2Humano(viento.getY2());
+                    juez.sumarPuntosHumanos();
+                    mensaje = juez.devolverInformacionHumana() + "Set: " + toStringSet() + "Tiro: " + toStringTiro();
+                    interfaz.displayMessage(mensaje);
+                 }
+            }while(empatados);
+        }
     }
 
     public String darPuntajeMasAlto(){
         String mensaje = "";
         mensaje = juez.darPuntajeMasAlto();
         return mensaje ;
-
     }
+    
     public int getSet(){    
         return contadorsets;
-
     }
 
     public int getTiro(){
         return contadortiros;
-
     }
 
     public String toStringTiro(){
         String tiros = ""+contadortiros;
         return tiros;
-
     }
 
     public String toStringSet(){
         String sets = ""+contadorsets;
         return sets;
-
     }
 
     public int decidirEstrategia(){
         int strat = 0;
         strat = (int)(Math.random()*3)+1;
         return strat;
-
     }
 
     public int decidirPrimerJugador(){
