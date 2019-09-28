@@ -3,15 +3,20 @@ public class Brain {
     private int cantSets, cantTiros, partidasJugadas, usarGrafica;
     private Partida partida;
 
-    public Brain(int args_count){                //Metodo constructor
+    //Metodo constructor
+    public Brain(int args_count){                
         interfaz = new Interfaz(args_count);
         usarGrafica = args_count;
-        cantSets = 2;
+        //Por default:
+        cantSets = 2;      
         cantTiros = 3;
         partidasJugadas = 0;
-
     }
 
+    /*
+    *   @Funcion: Le despliega al usuario el Menu y le pregunta por una opcion
+    *   @Return: variable entera "opcion" que refleja la opcion del menu seleccionada
+    */
     public int escogerOpcion(){
         int opcion = 14;
         boolean Seguir = true;
@@ -25,11 +30,14 @@ public class Brain {
            }
             Seguir = !(1<= opcion && opcion <= 5);
         }   
-  
         return opcion;
     }
     
-     public void decidirOpcion( int opcion ){
+    /*
+    *   @Funcion: Este metodo indica que hacer, que metodos ejecutar, segun la opcion seleccionada
+    *   @Param: variable entera "opcion"
+    */
+    public void decidirOpcion( int opcion ){
         switch (opcion){
             case 1:
                 partidasJugadas++;   
@@ -47,6 +55,11 @@ public class Brain {
         }
     }
     
+    /*
+    *   @Funcion: Metodo run que es llamado desde el Main. 
+    *            Despliega el menu al usuario mientras este no 
+    *            seleccione la opcion de "Salir"
+    */
     public void run(){
         int opcion;
         do{
@@ -56,16 +69,28 @@ public class Brain {
 
         salir();
     }
-
+    
+    /*
+    *   @Funcion: Inicia una partida segun la cantidad de sets y tiros 
+    *             modificada o no.
+    */
     public void iniciarPartida(){
         partida = new Partida( usarGrafica);
         partida.iniciarPartida(cantSets, cantTiros);
     }
     
+       /*
+    *   @Funcion: Se despide del usuario.
+    */
     public void salir(){
         interfaz.displayMessage("Adios Arquero!");
     }
     
+    /*
+    *   @Funcion: Dice al usuario el puntaje mas alto y por quien ha sido alcanzado
+    *             En caso de que se haya jugado ninguna partida, se muestra un mensaje
+    *             indicandolo.
+    */
     public void verPuntajeMasAlto(){
         String mensaje = "";
         if(partidasJugadas == 0){
@@ -77,6 +102,11 @@ public class Brain {
         }
     }
 
+    /*
+    *   @Funcion: Los siguientes dos metodos preguntan al usuario la cantidad deseada
+    *             de sets o tiros y modifican estos atributos para iniciar una partida
+    *             en el futuro con esas caracteristicas.
+    */
     public void configurarCantDeSets(){
         String entrada = interfaz.askInfo("Digite la cantidad de sets para el juego: ");
         try {
@@ -97,6 +127,5 @@ public class Brain {
             interfaz.displayMessage("Se configuraron 3 tiros por default al notar que no se ingreso un numero entero.");
             cantTiros = 3;
         }
-
      }
 }
