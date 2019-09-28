@@ -1,21 +1,25 @@
 public class EstrategiaAngel{
 
-    private Arcos arco;
-    private Juez juez;
+     /*
+      *private Arcos arco;
+      *private Juez juez;
+      *private int jugador;
+     */
     private double tirox , tiroy;
-    private int jugador;
   
     public EstrategiaAngel(){
         tirox = 0;
         tiroy = 0;
-        jugador = jugador = (int) (Math.random()*3)+1;
-        arco = new Arcos();
-        juez = new Juez();
+        /* 
+         * jugador = jugador = (int) (Math.random()*3)+1;
+         * arco = new Arcos();
+         * juez = new Juez();
+         */
     }
 
     public void tirar(int s, int t, double x2, double y2){
        
-        double x,y,x0,y0 = 0;
+        double x, y, x0, y0 = 0;
         if (t == 1){
             tirox = 1;
             tiroy = 1;  
