@@ -5,9 +5,9 @@ public class Jugador {
     private EstrategiaAngel estrategiaangel;
     private Interfaz interfaz;
 
-    public Jugador(int estrategia) {
+    public Jugador(int estrategia, int display) {
         estrategiaangel = new EstrategiaAngel();
-        interfaz = new Interfaz();
+        interfaz = new Interfaz(display);
 
         arco = new Arcos();
         tipoArco = (int) (Math.random()*3) +1;  
@@ -50,14 +50,24 @@ public class Jugador {
             y0 = estrategiaangel.getTiroy();
             break;
             case 2:
-            jugador2.tirar();
-            x0 = jugador1.getTirox();
-            y0 = jugador1.getTiroy();
+            estrategiaangel.tirar(s,t,x,y);
+            x0 = estrategiaangel.getTirox();
+            y0 = estrategiaangel.getTiroy();
             break;
             case 3:
-            jugador3.tirar();
-            x0 = jugador1.getTirox();
-            y0 = jugador1.getTiroy();
+            estrategiaangel.tirar(s,t,x,y);
+            x0 = estrategiaangel.getTirox();
+            y0 = estrategiaangel.getTiroy();
+            break;
+            case 14:
+            //jugador2.tirar();
+            //x0 = jugador1.getTirox();
+            //y0 = jugador1.getTiroy();
+            break;
+            case 16:
+            //jugador3.tirar();
+            //x0 = jugador1.getTirox();
+            //y0 = jugador1.getTiroy();
             break;
             case 4:
             
