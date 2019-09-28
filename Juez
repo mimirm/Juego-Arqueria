@@ -85,4 +85,8 @@ public class Juez{
         }
         return mensaje;
     }
+    
+    public boolean getEmpate(){
+        return empate;
+    }
 }
