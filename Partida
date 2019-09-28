@@ -9,35 +9,36 @@ public class Partida
     int contadorsets = 0;
     int contadortiros = 0;
     String mensaje = "";
-    public Partida(int usarGrafica){
+    
+    public Partida(int args_count){
         juez = new Juez();
-        jugadorhumano = new Jugador(4,usarGrafica );
-        jugadorIA = new Jugador(decidirEstrategia(), usarGrafica);
+        jugadorhumano = new Jugador(4, args_count );
+        jugadorIA = new Jugador(decidirEstrategia(), args_count);
         viento = new Vientos();
-        interfaz = new Interfaz(usarGrafica);
+        interfaz = new Interfaz(args_count);
     }
 
     public void iniciarPartida(int sets, int tiros){
         int primerjugador = decidirPrimerJugador();
-        System.out.println ();
         
-
-        for (int setActual = 1; setActual <= sets; i++){
+        for (int setActual = 1; setActual <= sets; setActual++){
             viento.setDireccionViento(((Math.random()*2)+1)*Math.PI); 
             viento.setTipoViento((int) (Math.random()*3)+1);
             if (contadorsets > 0){
                 interfaz.displayMessage("Fin del set: "+ toStringSet());
             }
             contadorsets = setActual;
-            for (int tiroActual = 1; tiroActual <= tiros; o++){
+            for (int tiroActual = 1; tiroActual <= tiros; tiroActual++){
                //Si el usuario va primero:
                if (primerjugador == 1){
                     //Turno del usuario
                     jugadorhumano.lanzarFlecha( setActual, tiroActual, viento.getX2(), viento.getY2());
-                    viento.desviarFlecha(jugadorhumano.getTirox(),jugadorhumano.getTiroy());
+                    viento.desviarFlecha(jugadorhumano.getTiroX(),jugadorhumano.getTiroY());
                     juez.setX2Humano(viento.getX2());
                     juez.setY2Humano(viento.getY2());
                     juez.sumarPuntosHumanos();
+                    mensaje = juez.devolverInformacionHumana() + "Set: " + toStringSet() + "Tiro: " + toStringTiro();
+                    interfaz.displayMessage(mensaje);
                     //Turno del IA
                     jugadorIA.lanzarFlecha( setActual, tiroActual, viento.getX2(), viento.getY2());
                     viento.desviarFlecha( jugadorIA.getTiroX(), jugadorIA.getTiroY());
@@ -45,7 +46,7 @@ public class Partida
                     juez.setY2IA( viento.getY2());
                     juez.sumarPuntosIA();
                     contadortiros = tiroActual;
-                    mensaje = juez.devolverInformacion() + "Set: " + toStringSet() + "Tiro: " + toStringTiro();
+                    mensaje = juez.devolverInformacionIA();
                     interfaz.displayMessage(mensaje);
                 }
                 //Si la maquina va primero:
@@ -56,7 +57,8 @@ public class Partida
                     juez.setX2IA(viento.getX2());
                     juez.setY2IA(viento.getY2());
                     juez.sumarPuntosIA();
-                    
+                    mensaje = juez.devolverInformacionIA();
+                    interfaz.displayMessage(mensaje);
                     //Turno del usuario
                     jugadorhumano.lanzarFlecha( setActual, tiroActual, viento.getX2(), viento.getY2());
                     viento.desviarFlecha( jugadorhumano.getTiroX(), jugadorhumano.getTiroY());
@@ -64,14 +66,18 @@ public class Partida
                     juez.setY2Humano(viento.getY2());
                     juez.sumarPuntosHumanos();
                     contadortiros = tiroActual;
-                    mensaje = juez.devolverInformacion() + "Set: " + toStringSet() + "Tiro: " + toStringTiro();
+                    mensaje = juez.devolverInformacionHumana() + "Set: " + toStringSet() + "Tiro: " + toStringTiro();
                     interfaz.displayMessage(mensaje);
                 }
             }
         }
         
-        interfaz.displayMessage(juez.decidirGanador());
-        juez.setJugadorMasAlto(interfaz.askInfo("Digite su nombre: ") );
+        String mensaje = juez.decidirGanador();
+        interfaz.displayMessage(mensaje);
+        if(juez.getUsuarioGano()){
+            juez.setJugadorMasAlto(interfaz.askInfo("Digite su nombre: ") );
+        }
+        
     }
 
     public String darPuntajeMasAlto(){
