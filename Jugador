@@ -28,7 +28,8 @@ public class Jugador {
          */
     }
 
-    public void lanzarFlecha(int s, int t, double x, double y){  //metodo pide coordenadas al jugador
+    //Este método pide coordenadas al jugador.
+    public void lanzarFlecha(int s, int t, double x, double y){  
         switch(tipoArco){
             case 1:
             estrategia(s,t,x,y);
@@ -48,8 +49,8 @@ public class Jugador {
         }
     }
 
+    //Este método decide la estrategia con la cual el jugador debería de tirar.
     public void estrategia(int s, int t, double x2, double y2){
-
         switch(estrategia){
             case 1:
             estrategiaAngel.tirar( s, t, x2, y2);
@@ -69,31 +70,19 @@ public class Jugador {
             y0 = estrategiaMilen.getTiroY();
             break;
             
-            case 14:
-            //jugador2.tirar();
-            //x0 = jugador1.getTirox();
-            //y0 = jugador1.getTiroy();
-            break;
-            
-            case 16:
-            //jugador3.tirar();
-            //x0 = jugador1.getTirox();
-            //y0 = jugador1.getTiroy();
-            break;
-            
             case 4:
             x0 = pedirTiroX();
             y0 = pedirTiroY();
-            break;
-            
+            break;           
         }
     }
 
+    //Este método le pide al usuario ingresar la coordenada donde quiere que la flecha se direccione y si decide ingresar algo diferente a un double o entero, se le da un 1 por default.
     public double pedirTiroX(){
         double numero = -1;
         String numeroEnLetras = interfaz.askInfo("Inserte la coordenada x");
         try {
-            numero = Integer.parseInt( numeroEnLetras );  
+            numero = Double.parseDouble( numeroEnLetras );  
         }
         catch(Exception e){
             numero = 1;
@@ -104,7 +93,7 @@ public class Jugador {
         double numero = -1;
         String numeroEnLetras = interfaz.askInfo("Inserte la coordenada y");
         try {
-            numero = Integer.parseInt( numeroEnLetras );  
+            numero = Double.parseDouble( numeroEnLetras );  
         }
         catch(Exception e){
             numero = 1;
