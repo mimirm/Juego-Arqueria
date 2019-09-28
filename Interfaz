@@ -16,7 +16,8 @@ public class Interfaz {
             input = new Scanner(System.in);
         }
     }
-    //Metodos cascarones para mostrar y pedir info
+    
+    //Estos métodos reciben un string para desplegarlo, ya sea en un pánel o en la terminal.
     public void displayMessage(String mensaje){
         if(usarGrafica){
             JOptionPane.showMessageDialog(null, mensaje);
