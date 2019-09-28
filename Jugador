@@ -1,12 +1,17 @@
 public class Jugador {
-    Arcos arco;
-    int tipoArco, estrategia;
-    double x0,y0,tirohumanox,tirohumanoy = 0;
-    private EstrategiaAngel estrategiaangel;
+    private Arcos arco;
+    private int tipoArco, estrategia;
+    private double x0, y0, tirohumanoX, tirohumanoY;
+    private EstrategiaAngel estrategiaAngel;
+    private EstrategiaJulian estrategiaJulian;
+    private EstrategiaMilen estrategiaMilen;
     private Interfaz interfaz;
 
     public Jugador(int estrategia, int display) {
-        estrategiaangel = new EstrategiaAngel();
+        estrategiaAngel = new EstrategiaAngel();
+        estrategiaJulian = new EstrategiaJulian();
+        estrategiaMilen = new EstrategiaMilen();
+        
         interfaz = new Interfaz(display);
 
         arco = new Arcos();
@@ -27,58 +32,64 @@ public class Jugador {
         switch(tipoArco){
             case 1:
             estrategia(s,t,x,y);
-            arco.arcoNovato (x0,y0);  
+            arco.arcoNovato (x0, y0);  
             break;
+            
             case 2:
             estrategia(s,t,x,y);
-            arco.arcoIntermedio (x0,y0);
+            arco.arcoIntermedio (x0, y0);
             break;
+            
             case 3:
             estrategia(s,t,x,y);
-            arco.arcoProfesional (x0,y0);
+            arco.arcoProfesional (x0, y0);
             break;
 
         }
     }
 
-    public void estrategia(int s, int t, double x, double y){
+    public void estrategia(int s, int t, double x2, double y2){
 
         switch(estrategia){
             case 1:
-            estrategiaangel.tirar(s,t,x,y);
-            x0 = estrategiaangel.getTirox();
-            y0 = estrategiaangel.getTiroy();
+            estrategiaAngel.tirar( s, t, x2, y2);
+            x0 = estrategiaAngel.getTiroX();
+            y0 = estrategiaAngel.getTiroY();
             break;
+            
             case 2:
-            estrategiaangel.tirar(s,t,x,y);
-            x0 = estrategiaangel.getTirox();
-            y0 = estrategiaangel.getTiroy();
+            estrategiaJulian.tirar( s, t, x2, y2);
+            x0 = estrategiaJulian.getTiroX();
+            y0 = estrategiaJulian.getTiroY();
             break;
+            
             case 3:
-            estrategiaangel.tirar(s,t,x,y);
-            x0 = estrategiaangel.getTirox();
-            y0 = estrategiaangel.getTiroy();
+            estrategiaMilen.tirar( s, t, x2, y2);
+            x0 = estrategiaMilen.getTiroX();
+            y0 = estrategiaMilen.getTiroY();
             break;
+            
             case 14:
             //jugador2.tirar();
             //x0 = jugador1.getTirox();
             //y0 = jugador1.getTiroy();
             break;
+            
             case 16:
             //jugador3.tirar();
             //x0 = jugador1.getTirox();
             //y0 = jugador1.getTiroy();
             break;
-            case 4:
             
-            x0 = pedirTirox();
-            y0 = pedirTiroy();
-
+            case 4:
+            x0 = pedirTiroX();
+            y0 = pedirTiroY();
             break;
+            
         }
     }
 
-    public double pedirTirox(){
+    public double pedirTiroX(){
         double numero = -1;
         String numeroEnLetras = interfaz.askInfo("Inserte la coordenada x");
         try {
@@ -89,7 +100,7 @@ public class Jugador {
         }
         return numero;
     }
-    public double pedirTiroy(){
+    public double pedirTiroY(){
         double numero = -1;
         String numeroEnLetras = interfaz.askInfo("Inserte la coordenada y");
         try {
@@ -101,11 +112,11 @@ public class Jugador {
         return numero;
     }
 
-    public double getTirox(){
+    public double getTiroX(){
       double tiro = x0;
       return tiro;
     }
-    public double getTiroy(){
+    public double getTiroY(){
       double tiro = y0;
       return tiro;
     }
