@@ -1,0 +1,42 @@
+public class EstrategiaMilen{
+    
+    private double tiroX, tiroY, tiroXAnterior, tiroYAnterior;
+    
+    public EstrategiaMilen(){
+        tiroXAnterior = 0;
+        tiroYAnterior = 0;
+    }
+    
+    public void tirar ( int setActual, int tiroActual, double x2, double y2){
+        
+        if(tiroActual == 1){
+            tiroX = 1;
+            tiroY = 1;
+        }
+        else{
+            double eX = x2 - tiroXAnterior;
+            double eY = y2 - tiroYAnterior;
+            if (eX > -0.05 && eX < 0.05){
+               double desVientoX = ((x2 - tiroXAnterior)*(Math.acos(x2)))/ x2;
+               double desVientoY = ((y2 - tiroYAnterior)*(Math.asin(y2)))/ y2;
+               tiroX = tiroXAnterior - desVientoX;
+               tiroY = tiroYAnterior - desVientoY;
+            }
+            else{
+               tiroX = 2*x2 - tiroXAnterior;
+               tiroY = 2*y2 - tiroYAnterior;
+            }
+        }
+        
+        tiroXAnterior = tiroX;
+        tiroYAnterior = tiroY;
+    }
+    
+    public double getTiroX(){
+        return tiroX;
+    }
+    
+    public double getTiroY(){
+        return tiroY;
+    }
+}
