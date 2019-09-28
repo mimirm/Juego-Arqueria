@@ -1,8 +1,9 @@
 //Este es el main xd
 
 public class Main{
-  public static void main (String[] args){
-    Brain brain = new Brain(args.length);
-    brain.run();
-  }
+      public static void main (String[] args){
+          Brain brain = new Brain(args.length);
+          brain.run();
+          System.exit(0);
+      }
 }
