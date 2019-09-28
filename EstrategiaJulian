@@ -11,8 +11,8 @@ public class EstrategiaJulian{
     }
     
     public void tirar(int setActual, int tiroActual, double x2, double y2){
-        tirox = (int) ((Math.random()*2)-0.5);
-        tiroy = (int) ((Math.random()*2)-0.5);
+        tirox = ((Math.random()*2)-0.5);
+        tiroy = ((Math.random()*2)-0.5);
     }
     
     public double getTiroX(){
