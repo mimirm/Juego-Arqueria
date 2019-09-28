@@ -4,14 +4,12 @@ public class Juez{
     private String puntajeMasAlto, jugadorMasAlto;
     private boolean empate, usuarioRecord;
     
-    //Constructor
     public Juez (){
        blanco = new Blanco();
        empate = false;
        usuarioRecord = false;
     }
 
-     //Partida le da donde cae la flecha humana
     public void setX2Humano(double x2){
         this.x2Humano = x2;
     }
@@ -23,13 +21,12 @@ public class Juez{
         return usuarioRecord;
     }
     
-    //juez calcula los puntos del usuario usando blanco
+    //Este método calcula los puntos del usuario usando un blanco.
     public void sumarPuntosHumanos (){
         double porSumar = blanco.calcularPuntos(x2Humano, y2Humano);
         puntosHumanos += porSumar;
     }
     
-    //Partida le da donde cae la flecha IA
     public void setX2IA(double x2){
         this.x2IA = x2;
     }
@@ -37,7 +34,7 @@ public class Juez{
         this.y2IA = y2;
     }
     
-    //juez calcula los puntos de IA usando blanco
+    //Este método calcula los puntos de IA usando un blanco.
     public void sumarPuntosIA (){
         double porSumar = blanco.calcularPuntos(x2IA, y2IA);
         puntosIA += porSumar;
@@ -46,22 +43,24 @@ public class Juez{
     public void setJugadorMasAlto(String mensaje){
         this.jugadorMasAlto = mensaje;
     }
-    //Para que el usuario se guie
+    //Este método despliega la información sobre el puntaje y donde cayó la flecha del usuario.
     public String devolverInformacionHumana(){
        String mensaje = "La flecha cayo en: (" + x2Humano + ", "+ y2Humano + ").\nSu puntaje actual es: "+ puntosHumanos + ". ";
        return mensaje;
     }
+    //Este método despliega la información sobre el puntaje y donde cayó la flecha del IA.
     public String devolverInformacionIA(){
         String mensaje = "La flecha de la maquina cayo en: ("+ x2IA+", "+y2IA+ ").\nLa maquina lleva un puntaje de: "+puntosIA+".";
         return mensaje;
     }
     
-    //Genera string que dice la info del puntaje mas alto
+    //Este método genera un string que dice la información del puntaje mas alto.
     public String darPuntajeMasAlto(){   //Para que cerebro pueda ver cuales son
         puntajeMasAlto = "El puntaje mas alto es: " + puntosMasAltos + "\nPor: "+jugadorMasAlto;
         return puntajeMasAlto;
     }
     
+    //Este método decide quién fue el ganador de la partida.
     public String decidirGanador(){
         String mensaje = "El ganador es:";
         if ( puntosHumanos > puntosIA){
