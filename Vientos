@@ -1,7 +1,7 @@
 public class Vientos{
+    
     double x2, y2, direccionViento;
     int tipoViento;
-    
   
     public void setDireccionViento(double direccionViento){
         this.direccionViento = direccionViento;
@@ -10,6 +10,11 @@ public class Vientos{
         this.tipoViento = tipoViento;
     }
     
+    /*
+    *  @Funcion: Decide segun el tipo de viento del set, como desviar las flechas
+    *  @Param1: Coordenada x
+    *  @Param2: Coordenada y
+    */
     public void desviarFlecha(double x1, double y1){
         switch(tipoViento){
             case 1:
@@ -25,6 +30,12 @@ public class Vientos{
         }
     }
     
+    /*
+    *   @Funcion: Los tres siguientes metodos aplican una marguen de error al tiro
+    *             segun los rangos de cada tipo de viento.
+    *   @Param1: Coordenada x
+    *   @Param2: Coordenada y
+    */
     public void soplarLeve(double x1, double y1){
         x2 = 0.0;
         y2 = 0.0;
