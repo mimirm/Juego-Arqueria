@@ -28,7 +28,7 @@ public class Partida{
             viento.setDireccionViento(((Math.random()*2)+1)*Math.PI); 
             viento.setTipoViento((int) (Math.random()*3)+1);
             if (contadorsets > 0){
-                interfaz.displayMessage("Fin del set: "+ toStringSet());
+                interfaz.displayMessage("Fin del set: "+ toStringSet() + juez.GanadordelSet());
              }
             contadorsets = setActual;
             for (int tiroActual = 1; tiroActual <= tiros; tiroActual++){
