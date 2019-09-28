@@ -2,12 +2,13 @@ public class Juez{
     private Blanco blanco;
     private double x2Humano, y2Humano, x2IA, y2IA, puntosHumanos, puntosIA, puntosMasAltos, puntosTiro;
     private String puntajeMasAlto, jugadorMasAlto;
-    private boolean empate;
+    private boolean empate, usuarioGano;
     
     //Constructor
     public Juez (){
        blanco = new Blanco();
        empate = false;
+       usuarioGano = false;
     }
 
      //Partida le da donde cae la flecha humana
@@ -16,6 +17,10 @@ public class Juez{
     }
      public void setY2Humano(double y2){
         this.y2Humano = y2;
+    }
+    
+    public boolean getUsuarioGano(){
+        return usuarioGano;
     }
     
     //juez calcula los puntos del usuario usando blanco
@@ -39,9 +44,13 @@ public class Juez{
     }
     
     //Para que el usuario se guie
-    public String devolverInformacion(){
-       String mensaje = "La flecha cayo en: (" + x2Humano + " ,"+ y2Humano + ").\nSu puntaje actual es: "+ puntosHumanos + ". ";
+    public String devolverInformacionHumana(){
+       String mensaje = "La flecha cayo en: (" + x2Humano + ", "+ y2Humano + ").\nSu puntaje actual es: "+ puntosHumanos + ". ";
        return mensaje;
+    }
+    public String devolverInformacionIA(){
+        String mensaje = "La flecha de la maquina cayo en: ("+ x2IA+", "+y2IA+ ").\nLa maquina lleva un puntaje de: "+puntosIA+".";
+        return mensaje;
     }
     
     //Guarda informacion del puntaje mas alto 
@@ -54,19 +63,21 @@ public class Juez{
     
     //Genera string que dice la info del puntaje mas alto
     public String darPuntajeMasAlto(){   //Para que cerebro pueda ver cuales son
-        puntosMasAltos=puntosHumanos;
-        puntajeMasAlto = "El puntaje mas alto es:" + puntosMasAltos + "\nPor: "+jugadorMasAlto;
+        puntajeMasAlto = "El puntaje mas alto es: " + puntosMasAltos + "\nPor: "+jugadorMasAlto;
         return puntajeMasAlto;
     }
     
     public String decidirGanador(){
-        String mensaje = "El ganador es: ";
+        String mensaje = "El ganador es:";
         if ( puntosHumanos > puntosIA){
-            mensaje += " Usted!\nCon "+ puntosHumanos + " puntos. "+ "\n Su rival obtuvo: " + puntosIA;
-            
+            mensaje += " Usted!\nCon "+ puntosHumanos + " puntos.";
+            usuarioGano = true;
+            puntosMasAltos = puntosHumanos;
         } 
         if ( puntosHumanos < puntosIA){
-            mensaje += " la computadora :(\nCon "+ puntosIA + " puntos. "+ "\n Usted obtuvo: " + puntosHumanos;
+            mensaje += " la computadora :(\nCon "+ puntosIA + " puntos.";
+            setJugadorMasAlto ("La Maquina");
+            puntosMasAltos = puntosIA;
         }
         if (puntosHumanos == puntosIA){
             mensaje = "Empate. Pasa a desempate";
