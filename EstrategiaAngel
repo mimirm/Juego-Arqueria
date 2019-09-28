@@ -1,24 +1,13 @@
 public class EstrategiaAngel{
-
-     /*
-      *private Arcos arco;
-      *private Juez juez;
-      *private int jugador;
-     */
     private double tirox , tiroy;
   
     public EstrategiaAngel(){
         tirox = 0;
         tiroy = 0;
-        /* 
-         * jugador = jugador = (int) (Math.random()*3)+1;
-         * arco = new Arcos();
-         * juez = new Juez();
-         */
     }
 
-    public void tirar(int s, int t, double x2, double y2){
-       
+    // Este método recibe el set y tiro actuales, y el tiro anterior para calcular donde tirar al sumar o restar la diferencia de dónde se tiró y dónde cayó la flecha.
+    public void tirar(int s, int t, double x2, double y2){     
         double x, y, x0, y0 = 0;
         if (t == 1){
             tirox = 1;
