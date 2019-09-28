@@ -2,13 +2,13 @@ public class Juez{
     private Blanco blanco;
     private double x2Humano, y2Humano, x2IA, y2IA, puntosHumanos, puntosIA, puntosMasAltos, puntosTiro;
     private String puntajeMasAlto, jugadorMasAlto;
-    private boolean empate, usuarioGano;
+    private boolean empate, usuarioRecord;
     
     //Constructor
     public Juez (){
        blanco = new Blanco();
        empate = false;
-       usuarioGano = false;
+       usuarioRecord = false;
     }
 
      //Partida le da donde cae la flecha humana
@@ -19,8 +19,8 @@ public class Juez{
         this.y2Humano = y2;
     }
     
-    public boolean getUsuarioGano(){
-        return usuarioGano;
+    public boolean getUsuarioRecord(){
+        return usuarioRecord;
     }
     
     //juez calcula los puntos del usuario usando blanco
@@ -33,7 +33,7 @@ public class Juez{
     public void setX2IA(double x2){
         this.x2IA = x2;
     }
-     public void setY2IA(double y2){
+    public void setY2IA(double y2){
         this.y2IA = y2;
     }
     
@@ -43,6 +43,9 @@ public class Juez{
         puntosIA += porSumar;
     }
     
+    public void setJugadorMasAlto(String mensaje){
+        this.jugadorMasAlto = mensaje;
+    }
     //Para que el usuario se guie
     public String devolverInformacionHumana(){
        String mensaje = "La flecha cayo en: (" + x2Humano + ", "+ y2Humano + ").\nSu puntaje actual es: "+ puntosHumanos + ". ";
@@ -51,14 +54,6 @@ public class Juez{
     public String devolverInformacionIA(){
         String mensaje = "La flecha de la maquina cayo en: ("+ x2IA+", "+y2IA+ ").\nLa maquina lleva un puntaje de: "+puntosIA+".";
         return mensaje;
-    }
-    
-    //Guarda informacion del puntaje mas alto 
-    public void setPuntosMasAltos(double puntosFinales){
-        this.puntosMasAltos = puntosFinales;
-    }
-    public void setJugadorMasAlto(String jugadorMasAlto){
-        this.jugadorMasAlto = jugadorMasAlto;
     }
     
     //Genera string que dice la info del puntaje mas alto
@@ -71,17 +66,25 @@ public class Juez{
         String mensaje = "El ganador es:";
         if ( puntosHumanos > puntosIA){
             mensaje += " Usted!\nCon "+ puntosHumanos + " puntos.";
-            usuarioGano = true;
-            puntosMasAltos = puntosHumanos;
+            empate = false;
+            if(puntosHumanos > puntosMasAltos){
+                puntosMasAltos = puntosHumanos;
+                usuarioRecord = true;
+            }
         } 
         if ( puntosHumanos < puntosIA){
             mensaje += " la computadora :(\nCon "+ puntosIA + " puntos.";
-            setJugadorMasAlto ("La Maquina");
-            puntosMasAltos = puntosIA;
+            empate = false;
+            if( puntosIA > puntosMasAltos){
+                puntosMasAltos = puntosIA;
+                jugadorMasAlto = "La Maquina";
+            }
         }
         if (puntosHumanos == puntosIA){
             mensaje = "Empate. Pasa a desempate";
             empate = true;
+            puntosHumanos = 0;
+            puntosIA = 0;
         }
         return mensaje;
     }
