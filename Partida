@@ -22,52 +22,56 @@ public class Partida
         System.out.println ();
         
 
-        for (int i = 1; i <= sets; i++){
+        for (int setActual = 1; setActual <= sets; i++){
             viento.setDireccionViento(((Math.random()*2)+1)*Math.PI); 
             viento.setTipoViento((int) (Math.random()*3)+1);
             if (contadorsets > 0){
                 interfaz.displayMessage("Fin del set: "+ toStringSet());
             }
-            contadorsets = i;
-            for (int o = 1; o <= tiros; o++){
-                if (primerjugador == 1){
-                    jugadorhumano.lanzarFlecha(i,o,viento.getX2(),viento.getY2());
+            contadorsets = setActual;
+            for (int tiroActual = 1; tiroActual <= tiros; o++){
+               //Si el usuario va primero:
+               if (primerjugador == 1){
+                    //Turno del usuario
+                    jugadorhumano.lanzarFlecha( setActual, tiroActual, viento.getX2(), viento.getY2());
                     viento.desviarFlecha(jugadorhumano.getTirox(),jugadorhumano.getTiroy());
                     juez.setX2Humano(viento.getX2());
                     juez.setY2Humano(viento.getY2());
                     juez.sumarPuntosHumanos();
-                    jugadorIA.lanzarFlecha(i,o,viento.getX2(),viento.getY2());
-                    viento.desviarFlecha(jugadorIA.getTirox(),jugadorIA.getTiroy());
-                    juez.setX2IA(viento.getX2());
-                    juez.setY2IA(viento.getY2());
+                    //Turno del IA
+                    jugadorIA.lanzarFlecha( setActual, tiroActual, viento.getX2(), viento.getY2());
+                    viento.desviarFlecha( jugadorIA.getTiroX(), jugadorIA.getTiroY());
+                    juez.setX2IA( viento.getX2());
+                    juez.setY2IA( viento.getY2());
                     juez.sumarPuntosIA();
-                    contadortiros = o;
-                    mensaje = juez.devolverInformacion()+"Set: "+toStringSet()+"Tiro: "+toStringTiro();
+                    contadortiros = tiroActual;
+                    mensaje = juez.devolverInformacion() + "Set: " + toStringSet() + "Tiro: " + toStringTiro();
                     interfaz.displayMessage(mensaje);
-
-                
                 }
+                //Si la maquina va primero:
                 else {
-                    jugadorIA.lanzarFlecha(i,o,viento.getX2(),viento.getY2());
-                    viento.desviarFlecha(jugadorIA.getTirox(),jugadorIA.getTiroy());
+                    //Turno de IA
+                    jugadorIA.lanzarFlecha( setActual, tiroActual, viento.getX2(), viento.getY2());
+                    viento.desviarFlecha( jugadorIA.getTiroX(),jugadorIA.getTiroY());
                     juez.setX2IA(viento.getX2());
                     juez.setY2IA(viento.getY2());
                     juez.sumarPuntosIA();
-                    jugadorhumano.lanzarFlecha(i,o,viento.getX2(),viento.getY2());
-                    viento.desviarFlecha(jugadorhumano.getTirox(),jugadorhumano.getTiroy());
+                    
+                    //Turno del usuario
+                    jugadorhumano.lanzarFlecha( setActual, tiroActual, viento.getX2(), viento.getY2());
+                    viento.desviarFlecha( jugadorhumano.getTiroX(), jugadorhumano.getTiroY());
                     juez.setX2Humano(viento.getX2());
                     juez.setY2Humano(viento.getY2());
                     juez.sumarPuntosHumanos();
-                    contadortiros = o;
-                    mensaje = juez.devolverInformacion()+"Set: "+toStringSet()+"Tiro: "+toStringTiro();
+                    contadortiros = tiroActual;
+                    mensaje = juez.devolverInformacion() + "Set: " + toStringSet() + "Tiro: " + toStringTiro();
                     interfaz.displayMessage(mensaje);
-
-                    
                 }
             }
         }
+        
         interfaz.displayMessage(juez.decidirGanador());
-        juez.setJugadorMasAlto(interfaz.askInfo("Digite su nombre: "));
+        juez.setJugadorMasAlto(interfaz.askInfo("Digite su nombre: ") );
     }
 
     public String darPuntajeMasAlto(){
