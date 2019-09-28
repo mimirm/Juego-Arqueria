@@ -1,7 +1,6 @@
 public class EstrategiaJulian{
     private double tirox , tiroy;
     
-    //El método contructor, le da valores predeterminados a las coordenadas "x" y "y" de un tiro.
     public EstrategiaJulian(){
         tirox = 0;
         tiroy = 0;
