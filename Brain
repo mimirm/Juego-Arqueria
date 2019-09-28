@@ -2,8 +2,7 @@ public class Brain {
     private Interfaz interfaz;
     private int cantSets, cantTiros, partidasJugadas, usarGrafica;
     private Partida partida;
-
-    //Metodo constructor
+    
     public Brain(int args_count){                
         interfaz = new Interfaz(args_count);
         usarGrafica = args_count;
