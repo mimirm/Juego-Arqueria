@@ -1,7 +1,7 @@
 public class Brain {
-    Interfaz interfaz;
+    private Interfaz interfaz;
     private int cantSets, cantTiros, partidasJugadas, usarGrafica;
-    Partida partida;
+    private Partida partida;
 
     public Brain(int args_count){                //Metodo constructor
         interfaz = new Interfaz(args_count);
@@ -25,7 +25,7 @@ public class Brain {
            }
             Seguir = !(1<= opcion && opcion <= 5);
         }   
-        interfaz.setOpcion(opcion);
+  
         return opcion;
     }
     
@@ -67,11 +67,12 @@ public class Brain {
     }
     
     public void verPuntajeMasAlto(){
+        String mensaje = "";
         if(partidasJugadas == 0){
             interfaz.displayMessage("No han habido partidas");
         }
         else{
-            String mensaje = partida.darPuntajeMasAlto();
+           mensaje += ""+ partida.darPuntajeMasAlto();
             interfaz.displayMessage(mensaje);
         }
     }
