@@ -11,43 +11,71 @@ public class Partida
     String mensaje = "";
     public Partida(int usarGrafica){
         juez = new Juez();
-        jugadorhumano = new Jugador(4);
-        jugadorIA = new Jugador(decidirEstrategia());
+        jugadorhumano = new Jugador(4,usarGrafica );
+        jugadorIA = new Jugador(decidirEstrategia(), usarGrafica);
         viento = new Vientos();
         interfaz = new Interfaz(usarGrafica);
     }
 
     public void iniciarPartida(int sets, int tiros){
         int primerjugador = decidirPrimerJugador();
-        int strat = decidirEstrategia();
+        System.out.println ();
+        
 
-        for (int i = 0; i <= sets; i++){
+        for (int i = 1; i <= sets; i++){
             viento.setDireccionViento(((Math.random()*2)+1)*Math.PI); 
             viento.setTipoViento((int) (Math.random()*3)+1);
+            if (contadorsets > 0){
+                interfaz.displayMessage("Fin del set: "+ toStringSet());
+            }
             contadorsets = i;
-            for (int o = 0; o <= tiros; o++){
+            for (int o = 1; o <= tiros; o++){
                 if (primerjugador == 1){
-                    jugadorhumano.lanzarFlecha(i,o,viento.getX2,viento.getY2);
+                    jugadorhumano.lanzarFlecha(i,o,viento.getX2(),viento.getY2());
                     viento.desviarFlecha(jugadorhumano.getTirox(),jugadorhumano.getTiroy());
-                    juez.setX2Humanos(viento.getX2());
-                    juez.setY2Humanos(viento.getY2());
-                    juez.sumarPuntos();
-                    jugadorIA.lanzarFlecha(i,o,viento.getX2,viento.getY2);
+                    juez.setX2Humano(viento.getX2());
+                    juez.setY2Humano(viento.getY2());
+                    juez.sumarPuntosHumanos();
+                    jugadorIA.lanzarFlecha(i,o,viento.getX2(),viento.getY2());
                     viento.desviarFlecha(jugadorIA.getTirox(),jugadorIA.getTiroy());
                     juez.setX2IA(viento.getX2());
                     juez.setY2IA(viento.getY2());
-                    juez.sumarPuntosHumanos();
-                    mensaje = juez.devolverInformacion()+"Set:"+toStringSet()+"Tiro:"+toStringTiro();
-                    interfaz.displayMessage(mensaje);
+                    juez.sumarPuntosIA();
                     contadortiros = o;
+                    mensaje = juez.devolverInformacion()+"Set: "+toStringSet()+"Tiro: "+toStringTiro();
+                    interfaz.displayMessage(mensaje);
 
                 
                 }
+                else {
+                    jugadorIA.lanzarFlecha(i,o,viento.getX2(),viento.getY2());
+                    viento.desviarFlecha(jugadorIA.getTirox(),jugadorIA.getTiroy());
+                    juez.setX2IA(viento.getX2());
+                    juez.setY2IA(viento.getY2());
+                    juez.sumarPuntosIA();
+                    jugadorhumano.lanzarFlecha(i,o,viento.getX2(),viento.getY2());
+                    viento.desviarFlecha(jugadorhumano.getTirox(),jugadorhumano.getTiroy());
+                    juez.setX2Humano(viento.getX2());
+                    juez.setY2Humano(viento.getY2());
+                    juez.sumarPuntosHumanos();
+                    contadortiros = o;
+                    mensaje = juez.devolverInformacion()+"Set: "+toStringSet()+"Tiro: "+toStringTiro();
+                    interfaz.displayMessage(mensaje);
+
+                    
+                }
             }
         }
-        juez.decidirGanador();
+        interfaz.displayMessage(juez.decidirGanador());
+        juez.setJugadorMasAlto(interfaz.askInfo("Digite su nombre: "));
     }
 
+    public String darPuntajeMasAlto(){
+        String mensaje = "";
+        mensaje = juez.darPuntajeMasAlto();
+        return mensaje ;
+
+    }
     public int getSet(){    
         return contadorsets;
 
@@ -70,10 +98,9 @@ public class Partida
 
     }
 
-
     public int decidirEstrategia(){
         int strat = 0;
-        strat = (int)(Math.random()*3);
+        strat = (int)(Math.random()*3)+1;
         return strat;
 
     }
@@ -84,4 +111,3 @@ public class Partida
     }
 
 }
-
