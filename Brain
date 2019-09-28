@@ -16,7 +16,7 @@ public class Brain {
         int opcion = 14;
         boolean Seguir = true;
         while (Seguir){
-           String entrada = interfaz.askInfo("\nMenu: \n1. Jugar \n2. Configurar cantidad de sets \n3. Configurar cantidad de tiros por set \n4. Ver Puntuacion mas alta \n5. SALIR");
+           String entrada = interfaz.askInfo("Menu: \n1. Jugar \n2. Configurar cantidad de sets \n3. Configurar cantidad de tiros por set \n4. Ver Puntuacion mas alta \n5. SALIR");
            try {
               opcion = Integer.parseInt( entrada );  
            }
@@ -36,13 +36,13 @@ public class Brain {
                 iniciarPartida();
             break;
             case 2:
-                verPuntajeMasAlto();
-            break;
-            case 3:
                 configurarCantDeSets();
             break;
-            case 4:
+            case 3:
                 configurarCantDeTirosPorSets();
+            break;
+            case 4:
+                verPuntajeMasAlto();
             break;
         }
     }
@@ -99,6 +99,5 @@ public class Brain {
         }
 
      }
-     
 
 }
