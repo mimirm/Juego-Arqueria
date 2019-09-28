@@ -54,17 +54,19 @@ public class Juez{
     
     //Genera string que dice la info del puntaje mas alto
     public String darPuntajeMasAlto(){   //Para que cerebro pueda ver cuales son
-        puntajeMasAlto = "El puntaje mas alto es:" + puntosMasAltos + "\nPor:"+jugadorMasAlto;
+        puntosMasAltos=puntosHumanos;
+        puntajeMasAlto = "El puntaje mas alto es:" + puntosMasAltos + "\nPor: "+jugadorMasAlto;
         return puntajeMasAlto;
     }
     
     public String decidirGanador(){
         String mensaje = "El ganador es: ";
         if ( puntosHumanos > puntosIA){
-            mensaje += " Usted!\nCon "+ puntosHumanos + " puntos.";
+            mensaje += " Usted!\nCon "+ puntosHumanos + " puntos. "+ "\n Su rival obtuvo: " + puntosIA;
+            
         } 
         if ( puntosHumanos < puntosIA){
-            mensaje += " la computadora :(\nCon "+ puntosIA + " puntos.";
+            mensaje += " la computadora :(\nCon "+ puntosIA + " puntos. "+ "\n Usted obtuvo: " + puntosHumanos;
         }
         if (puntosHumanos == puntosIA){
             mensaje = "Empate. Pasa a desempate";
