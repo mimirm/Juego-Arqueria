@@ -4,6 +4,9 @@ public class Interfaz {
     private boolean usarGrafica;
     Scanner input;
     
+    /* 
+    * Método constructor, recibe los argumentos que se ingresan al main para que el usuario decida si quiere una interfaz gráfica o desde la terminal.
+    */
     public Interfaz(int args_count){
         if(args_count == 0){
             usarGrafica = true;
