@@ -26,14 +26,14 @@ public class Arcos // Esta clase contiene los metodos para modificar el tiro seg
         y1 = y0 + signoRandom(Math.random() * 1);
     }
 
-    public void arcoIntermedio(double x, double y){  
+    public void arcoIntermedio(double x0, double y0){  
         x1 = 0;
         y1 = 0;
         x1 = x0 + signoRandom(Math.random() * 0.25);
         y1 = y0 + signoRandom(Math.random() * 0.25);
     }
 
-    public void arcoProfesional(double x, double y){  
+    public void arcoProfesional(double x0, double y0){  
         x1 = 0;
         y1 = 0;
         x1 = x0 + signoRandom(Math.random() * 0.05);
