@@ -1,5 +1,4 @@
-//Este es el main xd
-
+//Este es el main, al recibir un string como argumento, se cambia la interfaz gráfica por una de terminal.
 public class Main{
       public static void main (String[] args){
           Brain brain = new Brain(args.length);
