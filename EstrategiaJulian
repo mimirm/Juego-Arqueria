@@ -1,15 +1,16 @@
 public class EstrategiaJulian{
-    private Arcos arco;
     private double tirox , tiroy;
-    private int jugador;
     
+    //El método contructor, le da valores predeterminados a las coordenadas "x" y "y" de un tiro.
     public EstrategiaJulian(){
         tirox = 0;
         tiroy = 0;
-        jugador = jugador = (int) (Math.random()*3)+1;
-        arco = new Arcos();
     }
     
+    /*
+    * Este método recibe el set y tiro actuales y el tiro anterior pero, no lo utiliza, solo los recibe porque se escoge una estrategia aleatoria y las demás estrategias sí utilizan estos valores.
+    * La función del método es simplemente escoger una coordenada "x" y "y" aleatoria sin que se salga del círculo.
+    */
     public void tirar(int setActual, int tiroActual, double x2, double y2){
         tirox = ((Math.random()*2)-0.5);
         tiroy = ((Math.random()*2)-0.5);
