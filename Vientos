@@ -1,7 +1,7 @@
 public class Vientos{
     
-    double x2, y2, direccionViento;
-    int tipoViento;
+    private double x2, y2, direccionViento;
+    private int tipoViento;
   
     public void setDireccionViento(double direccionViento){
         this.direccionViento = direccionViento;
