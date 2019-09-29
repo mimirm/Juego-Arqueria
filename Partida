@@ -7,7 +7,7 @@ public class Partida{
     int contadorsets = 0;
     int contadortiros = 0;
     String mensaje = "";
-    
+
     public Partida(int args_count){
         juez = new Juez();
         jugadorhumano = new Jugador(4, args_count );
@@ -17,9 +17,11 @@ public class Partida{
     }
 
     /*
-    * Este método inicia la partida con los sets y tiros establecidos por el usuario o por default
-    * También devuelve al usuario su puntaje y dónde cayó su flecha después de cada tiro y, cuando termina un set, avisa que el set terminó y devuelve el ganador de dicho set.
-    * Si la partida acaba en un empate, el método inicia la muerte súbita hasta que desempaten los jugadores.
+    *   @Funcion: Este método inicia la partida con los sets y tiros establecidos por el usuario o por default
+    *             También devuelve al usuario su puntaje y dónde cayó su flecha después de cada tiro y, cuando 
+    *             termina un set, avisa que el set terminó y devuelve el ganador de dicho set.
+    *             Si la partida acaba en un empate, el método inicia la muerte súbita hasta que desempaten los jugadores.
+    *   @Param: Uiliza la cantidad de sets y tiros para contar cuantas rondas debe de hacer
     */
     public void iniciarPartida(int sets, int tiros){
         int primerjugador = decidirPrimerJugador();
@@ -134,7 +136,10 @@ public class Partida{
         }
     }
     
-    //Este método llama al juez para dar el puntaje más alto al usuario.
+    /*
+    *   @Funcion: Este método llama al juez para decirle el puntaje más alto al usuario.
+    *   @Return: String mensaje con esa informacion
+    */
     public String darPuntajeMasAlto(){
         String mensaje = "";
         mensaje = juez.darPuntajeMasAlto();
@@ -159,14 +164,20 @@ public class Partida{
         return sets;
     }
 
-    //Este método decide la estrategia del IA aleatoriamente.
+    /*
+    *   @Funcion: Este método decide la estrategia del jugador IA aleatoriamente.
+    *   @Return: variable int que indica el numero de estratega a utiliza*/
+    */
     public int decidirEstrategia(){
         int strat = 0;
         strat = (int)(Math.random()*3)+1;
         return strat;
     }
     
-    //Este método decide cuál jugador comenzará la partida aleatoriamente.
+    /*
+    *   @Funcion: Este método decide cuál jugador comenzará la partida aleatoriamente.
+    *   @Return: variable int que funciona como moneda.
+    */
     public int decidirPrimerJugador(){
         int primerJugador = (int)(Math.random()*3);
         return primerJugador;
