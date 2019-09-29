@@ -166,7 +166,7 @@ public class Partida{
 
     /*
     *   @Funcion: Este método decide la estrategia del jugador IA aleatoriamente.
-    *   @Return: variable int que indica el numero de estratega a utiliza*/
+    *   @Return: variable int que indica el numero de estratega a utiliza
     */
     public int decidirEstrategia(){
         int strat = 0;
