@@ -6,7 +6,11 @@ public class EstrategiaAngel{
         tiroy = 0;
     }
 
-    // Este método recibe el set y tiro actuales, y el tiro anterior para calcular donde tirar al sumar o restar la diferencia de dónde se tiró y dónde cayó la flecha.
+    /*
+    *   @Funcion: Metodo calcula donde tirar al sumar o restar la diferencia de dónde se tiró y 
+    *             dónde cayó la flecha del tiro anterior.
+    *   @Param: Se utilizan el set y tiro actuales, y el tiro anterior 
+    */
     public void tirar(int s, int t, double x2, double y2){     
         double x, y, x0, y0 = 0;
         if (t == 1){
