@@ -4,9 +4,9 @@ public class Partida{
     private Vientos viento;
     private Juez juez;
     private Interfaz interfaz;
-    int contadorsets = 0;
-    int contadortiros = 0;
-    String mensaje = "";
+    private int contadorsets = 0;
+    private int contadortiros = 0;
+    private String mensaje = "";
 
     public Partida(int args_count){
         juez = new Juez();
