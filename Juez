@@ -3,10 +3,7 @@ public class Juez{
     private double x2Humano, y2Humano, x2IA, y2IA, puntosHumanos, puntosIA, puntosMasAltos, puntosTiro;
     private String puntajeMasAlto, jugadorMasAlto;
     private boolean empate, usuarioRecord;
-    
-    /*
-    *   @Funcion: Metodo constructor
-    */
+
     public Juez (){
        blanco = new Blanco();
        empate = false;
