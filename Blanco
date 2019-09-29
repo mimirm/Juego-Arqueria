@@ -2,14 +2,22 @@ public class Blanco {
     // Esta clase tiene la funcion de devolver el puntaje obtenido en un tiro usando las coordenadas brindadas por el juez
     private double respuesta = 0.0;
 
-    // Este metodo calcula donde cae la flecha usando la ecuacion de la circunferencia
+    /*
+    *   @Funcion: Este metodo calcula en que lugar del blanco cae la flecha
+    *   @Param: Se utiliza las coordenadas (x, y) que han sufrido las desviaciones.
+    *   @Return: Valor del r^2 
+    */
     public double checkCirculo(double x, double y){  
         double circulo = 0.0; 
         circulo = Math.pow(x - 1,2) + Math.pow(y - 1,2);
         return circulo;
     }
     
-    // Este metodo calcula cuantos puntos se suman dependiendo de donde cayo la flecha
+    /*
+    *   @Funcion: Este metodo calcula cuantos puntos se suman dependiendo de donde cayo la flecha
+    *   @Param: Se utilizan las coordenadas (x, y) donde cayo la flecha
+    *   @Return: variable double que refleja la cantidad de puntos obtenida
+    */
     public double calcularPuntos (double x, double y){
         double puntosFinales = 0.0;
         double coordenada = checkCirculo(x,y);
