@@ -1,6 +1,12 @@
+/* 
+*  Los arcos son analogos a los niveles de experiencia de los jugadores.
+*  En vez de utilizar 'NivelDeExperiencia.." se crean arcos que se usan para tirar las flecha
+*  Asimismo, el nivel del arco afecta la presicion del tiro.
+*/
 public class Arcos {
-    // Esta clase contiene los metodos para modificar el tiro segun el nivel del tirador
-    double x1, y1; 
+
+    private double x1, y1; 
+    
     public Arcos (){
         x1 = 0.0;
         y1 = 0.0;
