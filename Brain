@@ -3,10 +3,7 @@ public class Brain {
     private Interfaz interfaz;
     private int cantSets, cantTiros, partidasJugadas, usarGrafica;
     private Partida partida;
-    /*
-    *   @Funcion: Metodo constructor
-    *   @Param: variable args_count utilizada para crear objeto interfaz
-    */
+
     public Brain(int args_count){                
         interfaz = new Interfaz(args_count);
         usarGrafica = args_count;
