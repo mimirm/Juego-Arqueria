@@ -24,11 +24,17 @@ public class Jugador {
         this.estrategia = estrategia;
         /*
          *   Estrategia 1 es humana
-         *              2 a 4 es robot
+         *              2 es EstrategiaAngel
+         *              3 es EstrategiaJulian
+         *              4 es EstrategiaMilen
          */
     }
 
-    //Este método pide coordenadas al jugador.
+    /*
+    *   @Funcion: Este método pide coordenadas al jugador.
+    *   @Param: Se utilizan el set y tiro actual, y las coordenadas (x, y) en donde
+    *           la flecha anterior cayo.
+    */
     public void lanzarFlecha(int s, int t, double x, double y){  
         switch(tipoArco){
             case 1:
@@ -49,7 +55,11 @@ public class Jugador {
         }
     }
 
-    //Este método decide la estrategia con la cual el jugador debería de tirar.
+    /*
+    *   @Funcion: Este método decide la estrategia con la cual el jugador debería de tirar.
+    *   @Param: Se utilizan el set y tiro actual, y las coordenadas (x, y) en donde
+    *           la flecha anterior cayo, para darle ayuda al jugador.
+    */
     public void estrategia(int s, int t, double x2, double y2){
         switch(estrategia){
             case 1:
@@ -77,7 +87,12 @@ public class Jugador {
         }
     }
 
-    //Este método le pide al usuario ingresar la coordenada donde quiere que la flecha se direccione y si decide ingresar algo diferente a un double o entero, se le da un 1 por default.
+    /*
+    *   @Funcion: Este método le pide al usuario ingresar la coordenada x donde quiere que la flecha 
+    *             se direccione y si decide ingresar algo diferente a un double o entero, se le asigna 
+    *             un 1 por default.
+    *   @Return: variable double que indica la coorednada x
+    */
     public double pedirTiroX(){
         double numero = -1;
         String numeroEnLetras = interfaz.askInfo("Inserte la coordenada x");
@@ -89,6 +104,13 @@ public class Jugador {
         }
         return numero;
     }
+    
+    /*
+    *   @Funcion: Este método le pide al usuario ingresar la coordenada y donde quiere que la flecha 
+    *             se direccione y si decide ingresar algo diferente a un double o entero, se le asigna 
+    *             un 1 por default.
+    *   @Return: variable double que indica la coorednada y
+    */
     public double pedirTiroY(){
         double numero = -1;
         String numeroEnLetras = interfaz.askInfo("Inserte la coordenada y");
