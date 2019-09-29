@@ -2,11 +2,23 @@ public class EstrategiaMilen{
     
     private double tiroX, tiroY, tiroXAnterior, tiroYAnterior;
     
+    /*
+    *   @Funcion: Metodo constructor
+    */
     public EstrategiaMilen(){
         tiroXAnterior = 0;
         tiroYAnterior = 0;
     }
     
+    /*
+    *   @Funcion: Este metodo calcula valores de 'x' y 'y' para el siguiente tiro.
+    *             De forma resumida, el primer tiro sera siempre hacia el centro de
+    *             la diana. Los demas trataran de encontrar la desviacion causada unicamente
+    *             por el nivel de experiencia, si esta es muy baja trata de encontrar la
+    *             causada por el viento.
+    *   @Param: Utiliza el numero de set en juego, el numero de tiro en juego,
+    *           y las coodenadas (x, y) en donde cayo la flecha pasada.
+    */
     public void tirar ( int setActual, int tiroActual, double x2, double y2){
         
         if(tiroActual == 1){
