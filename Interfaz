@@ -5,7 +5,9 @@ public class Interfaz {
     Scanner input;
     
     /* 
-    * Método constructor, recibe los argumentos que se ingresan al main para que el usuario decida si quiere una interfaz gráfica o desde la terminal.
+    *   @Funcion: Método constructor
+    *   @Param: recibe los argumentos que se ingresan al main para utilizar
+    *           la interfaz gráfica o la terminal.
     */
     public Interfaz(int args_count){
         if(args_count == 0){
@@ -17,7 +19,11 @@ public class Interfaz {
         }
     }
     
-    //Estos métodos reciben un string para desplegarlo, ya sea en un pánel o en la terminal.
+    /*
+    *   @Funcion: Este metodo le muestra el mensaje al usuario segun la 
+    *             interfaz activada.
+    *   @Param: String mensaje que contiene el mensaje que se desea mostrar
+    */
     public void displayMessage(String mensaje){
         if(usarGrafica){
             JOptionPane.showMessageDialog(null, mensaje);
@@ -26,6 +32,12 @@ public class Interfaz {
             System.out.println(mensaje);
         }
     }
+    /*
+    *   @Funcion: Muestra al usuario un mensaje, le pide a este
+    *             que ingrese la informacion deseada.
+    *   @Param: String mensaje que contiene el mensaje que se desea mostrar
+    *   @Return: String entrada que contiene lo que el usurio ingreso ante la pregunta.
+    */
     public String askInfo(String mensaje){
         String entrada;
         if(usarGrafica){ 
