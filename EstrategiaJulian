@@ -1,14 +1,19 @@
 public class EstrategiaJulian{
     private double tirox , tiroy;
     
+    /*
+    *   @Funcion: Metodo constructor
+    */
     public EstrategiaJulian(){
         tirox = 0;
         tiroy = 0;
     }
     
     /*
-    * Este método recibe el set y tiro actuales y el tiro anterior pero, no lo utiliza, solo los recibe porque se escoge una estrategia aleatoria y las demás estrategias sí utilizan estos valores.
-    * La función del método es simplemente escoger una coordenada "x" y "y" aleatoria sin que se salga del círculo.
+    *   @Funcion: La función del método es simplemente escoger una coordenada 
+    *             "x" y "y" aleatoria sin que se salga del círculo.
+    *   @Param: Recibe set y tiro actual, y donde cayo el tiro anterior,
+    *           pero no utiliza esos valores.
     */
     public void tirar(int setActual, int tiroActual, double x2, double y2){
         tirox = ((Math.random()*2)-0.5);
