@@ -1,10 +1,7 @@
 public class EstrategiaMilen{
     
     private double tiroX, tiroY, tiroXAnterior, tiroYAnterior;
-    
-    /*
-    *   @Funcion: Metodo constructor
-    */
+
     public EstrategiaMilen(){
         tiroXAnterior = 0;
         tiroYAnterior = 0;
