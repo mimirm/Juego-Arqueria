@@ -3,12 +3,7 @@ import java.util.Scanner;
 public class Interfaz {
     private boolean usarGrafica;
     Scanner input;
-    
-    /* 
-    *   @Funcion: Método constructor
-    *   @Param: recibe los argumentos que se ingresan al main para utilizar
-    *           la interfaz gráfica o la terminal.
-    */
+
     public Interfaz(int args_count){
         if(args_count == 0){
             usarGrafica = true;
