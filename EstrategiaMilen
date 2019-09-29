@@ -19,27 +19,34 @@ public class EstrategiaMilen{
     *   @Param: Utiliza el numero de set en juego, el numero de tiro en juego,
     *           y las coodenadas (x, y) en donde cayo la flecha pasada.
     */
-    public void tirar ( int setActual, int tiroActual, double x2, double y2){
-        
+    public void tirar ( int setActual, int tiroActual, double x2, double y2){ 
         if(tiroActual == 1){
             tiroX = 1;
             tiroY = 1;
         }
         else{
-            double eX = x2 - tiroXAnterior;
-            double eY = y2 - tiroYAnterior;
-            if (eX > -0.05 && eX < 0.05){
-               double desVientoX = ((x2 - tiroXAnterior)*(Math.acos(x2)))/ x2;
-               double desVientoY = ((y2 - tiroYAnterior)*(Math.asin(y2)))/ y2;
-               tiroX = tiroXAnterior - desVientoX;
-               tiroY = tiroYAnterior - desVientoY;
+            if( x2 ==0 || y2 == 0){
+                tiroX = 1;
+                tiroY = 1;
             }
             else{
-               tiroX = 2*x2 - tiroXAnterior;
-               tiroY = 2*y2 - tiroYAnterior;
+                double eX = x2 - tiroXAnterior;
+                double eY = y2 - tiroYAnterior;
+                if (eX > -0.05 && eX < 0.05){
+                   double desVientoX = ((x2 - tiroXAnterior)*(Math.acos(x2)))/ x2;
+                   tiroX = tiroXAnterior - desVientoX;
+                }
+                else{
+                   tiroX = 2*x2 - tiroXAnterior;
+                if (eY > -0.05 && eY < 0.05){
+                   double desVientoY = ((y2 - tiroYAnterior)*(Math.asin(y2)))/ y2;
+                   tiroY = tiroYAnterior - desVientoY;
+                }
+                else{
+                   tiroY = 2*y2 - tiroYAnterior;
+                }
             }
         }
-        
         tiroXAnterior = tiroX;
         tiroYAnterior = tiroY;
     }
