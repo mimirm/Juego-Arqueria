@@ -1,4 +1,5 @@
 //Este es el main, al recibir un string como argumento, se cambia la interfaz gráfica por una de terminal.
+//Simplemente inicia el programa
 public class Main{
       public static void main (String[] args){
           Brain brain = new Brain(args.length);
