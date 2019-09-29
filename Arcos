@@ -6,7 +6,11 @@ public class Arcos {
         y1 = 0.0;
     }
 
-    // Este metodo elige aleatoriamente si el valor de entrada es negativo o positivo
+    /*
+    *   @Funcion: Este metodo elige aleatoriamente si el valor de entrada es negativo o positivo.
+    *   @Param: variable double x
+    *   @Return: varible double de valor x , pero con signo positivo o negativo.
+    */
     public double signoRandom(double x){  
         int i = 0;
         double y = 0;
@@ -20,7 +24,11 @@ public class Arcos {
         return y;
     }
 
-    // Estos métodos calculan el error del tiro dependiendo de la habilidad del tirador, eligen un numero aleatorio entre 0 y el margen, luego eligen si es positivo o negativo
+    /*
+    *   @Funcion: Los tres siguiente metodos calculan el error del tiro dependiendo de la habilidad del tirador, 
+    *             eligen un numero aleatorio entre 0 y el margen, luego eligen si es positivo o negativo.
+    *   @Param: Se utilizan las coordenadas (x, y) seleccionadas por el jugador
+    */
     public void arcoNovato(double x0, double y0){   
         x1 = 0;
         y1 = 0;
