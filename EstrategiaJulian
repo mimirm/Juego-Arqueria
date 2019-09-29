@@ -1,9 +1,6 @@
 public class EstrategiaJulian{
     private double tirox , tiroy;
     
-    /*
-    *   @Funcion: Metodo constructor
-    */
     public EstrategiaJulian(){
         tirox = 0;
         tiroy = 0;
