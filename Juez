@@ -81,10 +81,10 @@ public class Juez{
     public String GanadordelSet(){
         String mensaje = "\nEl ganador de este set fue: ";
         if ( puntosHumanos > puntosIA){
-            mensaje += "Usted! :o";
+            mensaje += " Usted! :o";
         } 
         if ( puntosHumanos < puntosIA){
-            mensaje += "La maquina :( \nPongase las pilas!! >:I";
+            mensaje += " La maquina :( \nPongase las pilas!! >:I";
         }
         if (puntosHumanos == puntosIA){
             mensaje = " No hubo ganador, llevan la misma puntuacion";
