@@ -54,7 +54,9 @@ public class Vientos{
         x2 = x1 + (((Math.random()*9)+1)/10)*Math.cos(direccionViento);
         y2 = y1 + (((Math.random()*9)+1)/10)*Math.sin(direccionViento);
     }
-    
+    public int getViento(){
+        return tipoViento;
+    }
     public double getX2(){
         return x2;
     }
