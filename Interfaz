@@ -42,7 +42,7 @@ public class Interfaz {
                        JOptionPane.QUESTION_MESSAGE);
         }
         else{
-            System.out.println(mensaje);
+            System.out.println("\n"+mensaje);
             entrada = input.next();
         }
         return entrada;
