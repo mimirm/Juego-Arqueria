@@ -1,13 +1,14 @@
 public class Juez{
     private Blanco blanco;
     private double x2Humano, y2Humano, x2IA, y2IA, puntosHumanos, puntosIA, puntosMasAltos, puntosTiro;
-    private String puntajeMasAlto, jugadorMasAlto;
+    private String puntajeMasAlto, jugadorMasAlto, informacion;
     private boolean empate, usuarioRecord;
 
     public Juez (){
        blanco = new Blanco();
        empate = false;
        usuarioRecord = false;
+       informacion = "";
     }
    
     public void setX2Humano(double x2){
@@ -42,10 +43,12 @@ public class Juez{
     public void sumarPuntosHumanos (){
         double porSumar = blanco.calcularPuntos(x2Humano, y2Humano);
         puntosHumanos += porSumar;
+        informacion +="Tiro del usuario: x = "+ x2Humano + " y = " + y2Humano + " puntos del turno: " + puntosHumanos +"\n" ;  
     }
     public void sumarPuntosIA (){
         double porSumar = blanco.calcularPuntos(x2IA, y2IA);
         puntosIA += porSumar;
+        informacion +="Tiro del oponente: x = "+ x2IA + " y = " + y2IA + " puntos del turno: " + puntosIA + "\n" ;
     }
     
     /*
@@ -118,5 +121,12 @@ public class Juez{
             puntosIA = 0;
         }
         return mensaje;
+    }
+    
+    public String getInfo(){
+        String i = informacion;
+        informacion = "";
+        return i;
+        
     }
 }
