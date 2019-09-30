@@ -55,7 +55,7 @@ public class Partida{
                     juez.setX2Humano(viento.getX2());
                     juez.setY2Humano(viento.getY2());
                     juez.sumarPuntosHumanos();
-                    mensaje = juez.devolverInformacionHumana() + "Set: " + toStringSet() + "Tiro: " + toStringTiro();
+                    mensaje = juez.devolverInformacionHumana() + "Set: " + toStringSet() + " Tiro: " + toStringTiro();
                     interfaz.displayMessage(mensaje);
                     //Turno del IA
                     jugadorIA.lanzarFlecha( setActual, tiroActual, viento.getX2(), viento.getY2());
@@ -84,7 +84,7 @@ public class Partida{
                     juez.setY2Humano(viento.getY2());
                     juez.sumarPuntosHumanos();
                     contadortiros = tiroActual;
-                    mensaje = juez.devolverInformacionHumana() + "Set: " + toStringSet() + "Tiro: " + toStringTiro();
+                    mensaje = juez.devolverInformacionHumana() + "Set: " + toStringSet() + " Tiro: " + toStringTiro();
                     interfaz.displayMessage(mensaje);
                 }
                 info += "\nTiro : "+tiroActual + "\n" + juez.getInfo() ;
