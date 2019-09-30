@@ -87,7 +87,7 @@ public class Juez{
             mensaje += "La maquina :( \nPongase las pilas!! >:I";
         }
         if (puntosHumanos == puntosIA){
-            mensaje = "No hubo ganador, llevan la misma puntuacion";
+            mensaje = " No hubo ganador, llevan la misma puntuacion";
         }
         return mensaje;
     }
@@ -115,7 +115,7 @@ public class Juez{
             }
         }
         if (puntosHumanos == puntosIA){
-            mensaje = "Empate. Pasa a desempate";
+            mensaje = " Empate. Pasa a desempate";
             empate = true;
             puntosHumanos = 0;
             puntosIA = 0;
