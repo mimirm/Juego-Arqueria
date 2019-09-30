@@ -131,4 +131,21 @@ public class Jugador {
       double tiro = y0;
       return tiro;
     }
+    public String getJugador(){
+      String arco = "";
+      switch(tipoArco){
+            case 1:
+            arco = "novato";    
+            break;
+            case 2:
+            arco = "intermedio";  
+            break;
+            case 3:
+            arco = "profesional";  
+            break;      
+        
+        }
+        return arco;
+    }
+    
 }
