@@ -6,7 +6,7 @@ public class Partida{
     private Interfaz interfaz;
     private int contadorsets = 0;
     private int contadortiros = 0;
-    private String mensaje = "";
+    private String mensaje = "", info = "";
 
     public Partida(int args_count){
         juez = new Juez();
@@ -17,25 +17,38 @@ public class Partida{
     }
 
     /*
-    *   @Funcion: Este método inicia la partida con los sets y tiros establecidos por el usuario o por default
-    *             También devuelve al usuario su puntaje y dónde cayó su flecha después de cada tiro y, cuando 
-    *             termina un set, avisa que el set terminó y devuelve el ganador de dicho set.
-    *             Si la partida acaba en un empate, el método inicia la muerte súbita hasta que desempaten los jugadores.
-    *   @Param: Uiliza la cantidad de sets y tiros para contar cuantas rondas debe de hacer
-    */
+     *   @Funcion: Este método inicia la partida con los sets y tiros establecidos por el usuario o por default
+     *             También devuelve al usuario su puntaje y dónde cayó su flecha después de cada tiro y, cuando 
+     *             termina un set, avisa que el set terminó y devuelve el ganador de dicho set.
+     *             Si la partida acaba en un empate, el método inicia la muerte súbita hasta que desempaten los jugadores.
+     *   @Param: Uiliza la cantidad de sets y tiros para contar cuantas rondas debe de hacer
+     */
     public void iniciarPartida(int sets, int tiros){
         int primerjugador = decidirPrimerJugador();
-        
+
         for (int setActual = 1; setActual <= sets; setActual++){
             viento.setDireccionViento(((Math.random()*2)+1)*Math.PI); 
             viento.setTipoViento((int) (Math.random()*3)+1);
+            info += "\nSet : "+setActual + " ";
             if (contadorsets > 0){
-                interfaz.displayMessage("Fin del set: "+ toStringSet() + juez.GanadordelSet());
-             }
+                interfaz.displayMessage("Fin del set: "+ toStringSet() + juez.GanadordelSet()+"\n");
+                switch(viento.getViento()){
+                    case 1:
+                    interfaz.displayMessage("El viento del set fue leve");
+                    break;
+                    case 2:
+                    interfaz.displayMessage("El viento del set fue intermedio");
+                    break;
+                    case 3:
+                    interfaz.displayMessage("El viento del set fue fuerte");
+                    break;      
+
+                }
+            }
             contadorsets = setActual;
             for (int tiroActual = 1; tiroActual <= tiros; tiroActual++){
-               //Si el usuario va primero:
-               if (primerjugador == 1){
+                //Si el usuario va primero:
+                if (primerjugador == 1){
                     //Turno del usuario
                     jugadorhumano.lanzarFlecha( setActual, tiroActual, viento.getX2(), viento.getY2());
                     viento.desviarFlecha(jugadorhumano.getTiroX(),jugadorhumano.getTiroY());
@@ -74,22 +87,23 @@ public class Partida{
                     mensaje = juez.devolverInformacionHumana() + "Set: " + toStringSet() + "Tiro: " + toStringTiro();
                     interfaz.displayMessage(mensaje);
                 }
+                info += "\nTiro : "+tiroActual + "\n" + juez.getInfo() ;
             }
         }
-        
-        String mensaje = juez.decidirGanador();
+
+        String mensaje = juez.decidirGanador()+"\n\nSu jugador fue: "+dificultad(1)+"\n El jugador de su adversario fue: "+dificultad(2)+ "\n\nInformacion de la partida: \n"+info;
         interfaz.displayMessage(mensaje);
         if(juez.getUsuarioRecord()){
             juez.setJugadorMasAlto(interfaz.askInfo("Digite su nombre: ") );
         }
-        
+
         if(juez.getEmpate()){
             //Muerte Subita
             boolean empatados = true;
             do{
                 viento.setDireccionViento(((Math.random()*2)+1)*Math.PI); 
                 viento.setTipoViento((int) (Math.random()*3)+1);
-                
+
                 //Si el usuario va primero:
                 if (primerjugador == 1){
                     //Turno del usuario
@@ -108,10 +122,10 @@ public class Partida{
                     juez.sumarPuntosIA();
                     mensaje = juez.devolverInformacionIA();
                     interfaz.displayMessage(mensaje);
-                    
-                 }
+
+                }
                 //Si la maquina va primero:
-                 else {
+                else {
                     //Turno de IA
                     jugadorIA.lanzarFlecha( 1, 1, viento.getX2(), viento.getY2());
                     viento.desviarFlecha( jugadorIA.getTiroX(),jugadorIA.getTiroY());
@@ -128,24 +142,24 @@ public class Partida{
                     juez.sumarPuntosHumanos();
                     mensaje = juez.devolverInformacionHumana() + "Set: " + toStringSet() + "Tiro: " + toStringTiro();
                     interfaz.displayMessage(mensaje);
-                 }
+                }
                 mensaje = juez.decidirGanador();
                 interfaz.displayMessage(mensaje);
                 empatados = juez.getEmpate();
             }while(empatados);
         }
     }
-    
+
     /*
-    *   @Funcion: Este método llama al juez para decirle el puntaje más alto al usuario.
-    *   @Return: String mensaje con esa informacion
-    */
+     *   @Funcion: Este método llama al juez para decirle el puntaje más alto al usuario.
+     *   @Return: String mensaje con esa informacion
+     */
     public String darPuntajeMasAlto(){
         String mensaje = "";
         mensaje = juez.darPuntajeMasAlto();
         return mensaje ;
     }
-    
+
     public int getSet(){    
         return contadorsets;
     }
@@ -165,22 +179,37 @@ public class Partida{
     }
 
     /*
-    *   @Funcion: Este método decide la estrategia del jugador IA aleatoriamente.
-    *   @Return: variable int que indica el numero de estratega a utiliza
-    */
+     *   @Funcion: Este método decide la estrategia del jugador IA aleatoriamente.
+     *   @Return: variable int que indica el numero de estratega a utiliza*/
+
     public int decidirEstrategia(){
         int strat = 0;
         strat = (int)(Math.random()*3)+1;
         return strat;
     }
-    
+
     /*
-    *   @Funcion: Este método decide cuál jugador comenzará la partida aleatoriamente.
-    *   @Return: variable int que funciona como moneda.
-    */
+     *   @Funcion: Este método decide cuál jugador comenzará la partida aleatoriamente.
+     *   @Return: variable int que funciona como moneda.
+     */
     public int decidirPrimerJugador(){
         int primerJugador = (int)(Math.random()*3);
         return primerJugador;
+    }
+    /*
+     *   @Funcion: Este método recibe la dificultad del jugador humano y de la IA de la clase jugador.
+     *   @Return: variable String con la dificultad.
+     */
+    public String dificultad(int tipo){
+        String x = "";
+        if (tipo == 1){
+            x = ""+jugadorhumano.getJugador();
+        }
+        else {
+            x = ""+jugadorIA.getJugador();
+            
+        }
+        return x;
     }
 
 }
