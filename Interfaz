@@ -1,51 +1,44 @@
-import javax.swing.JOptionPane;
 import java.util.Scanner;
 public class Interfaz {
-    private boolean usarGrafica;
-    Scanner input;
-
-    public Interfaz(int args_count){
-        if(args_count == 0){
-            usarGrafica = true;
-        }
-        else{
-            usarGrafica = false; 
-            input = new Scanner(System.in);
-        }
+    public static final String  ERROR_MESSAGE = "Error! Ingreso no valido.\nIntente de nuevo. ";
+    private Scanner input;
+    
+    public Interfaz (){
+        input = new Scanner(System.in);
     }
     
     /*
-    *   @Funcion: Este metodo le muestra el mensaje al usuario segun la 
-    *             interfaz activada.
-    *   @Param: String mensaje que contiene el mensaje que se desea mostrar
-    */
-    public void displayMessage(String mensaje){
-        if(usarGrafica){
-            JOptionPane.showMessageDialog(null, mensaje);
-        }
-        else{
-            System.out.println(mensaje);
-        }
-    }
-    /*
-    *   @Funcion: Muestra al usuario un mensaje, le pide a este
-    *             que ingrese la informacion deseada.
-    *   @Param: String mensaje que contiene el mensaje que se desea mostrar
-    *   @Return: String entrada que contiene lo que el usurio ingreso ante la pregunta.
-    */
-    public String askInfo(String mensaje){
-        String entrada;
-        if(usarGrafica){ 
-            entrada = JOptionPane.showInputDialog(
-                       null,
-                       mensaje,
-                       JOptionPane.QUESTION_MESSAGE);
-        }
-        else{
-            System.out.println("\n"+mensaje);
-            entrada = input.next();
-        }
-        return entrada;
+     *   @Funcion: Este metodo le muestra el mensaje al usuario
+     *   @Param: String que contiene el mensaje que se desea mostrar
+     */
+    public void showMessage(String mensaje){
+        System.out.println(mensaje);
     }
 
+    /*
+     *   @Funcion: Muestra al usuario un mensaje, le pide a este
+     *             que ingrese el entero deseado.
+     *   @Param: String mensaje que contiene el mensaje de instruccion para el usuario
+     *   @Return: Int numero que contiene el entero valido (entre 0 e infinito positivo)
+     *            que ingreso el usuario.
+     */
+    public int askInt(String mensaje){
+        int numero = -1;
+        String entrada = "";
+        do{
+            System.out.println("\n"+mensaje);
+            entrada = input.next();
+            try{
+               numero = Integer.parseInt(entrada);
+               if( numero < 0 ){
+                   numero = -1;
+                   System.out.println(ERROR_MESSAGE);
+               }
+            }
+            catch(Exception e){
+               System.out.println(ERROR_MESSAGE);
+            }
+        }while (numero == -1);
+        return numero;
+    }
 }
